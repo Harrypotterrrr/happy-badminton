@@ -372,7 +372,7 @@ def to_compact_payload(data: dict[str, Any]) -> dict[str, Any]:
 
 def generate_markdown_calendar(data: dict[str, Any]) -> str:
   lines = [
-      "# 🏸 NYBC Flushing Badminton Availability Calendar (You & Your Crush)",
+      "# 🏸 NYBC Flushing Badminton Court Availability Calendar",
       "",
       f"- **Location**: `{data['location']}`",
       f"- **Category**: `{data['category']}`",
@@ -383,9 +383,9 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
   p2 = data["availabilityByPlayers"].get("2")
   if p2:
     lines.extend([
-        f"## 💑 2 Players (`{p2['name']}` — {p2['durationMinutes']} min, \\${p2['priceUsd']})",
+        f"## 👥 2 Players (`{p2['name']}` — {p2['durationMinutes']} min, \\${p2['priceUsd']})",
         "",
-        "| Date | Day | Prime Date Slots (Eve / Wknd) | All Available Start Times (with Open Courts) |",
+        "| Date | Day | Prime Slots (Eve / Wknd) | All Available Start Times (with Open Courts) |",
         "| :--- | :--- | :--- | :--- |",
     ])
     for day in p2["days"]:
@@ -417,7 +417,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NYBC Flushing Badminton Availability — You & Your Crush</title>
+  <title>NYBC Flushing Badminton — Court Availability Calendar</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {{
@@ -450,7 +450,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div class="space-y-1">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-pink-500/15 text-pink-500 border border-pink-500/30">🏸 Badminton Date Planner</span>
+          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-pink-500/15 text-pink-500 border border-pink-500/30">🏸 NYBC Flushing Schedule</span>
           <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-[var(--secondary)] text-[var(--secondary-foreground)]">📍 132-70 34th Ave, Flushing NY 11354</span>
         </div>
         <h1 class="text-xl md:text-2xl font-bold text-[var(--foreground)]">NYBC Flushing Court Availability Calendar</h1>
@@ -488,12 +488,12 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
       </div>
     </div>
 
-    <!-- Top Date Picks for You & Your Crush -->
+    <!-- Top Prime Picks -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow-sm space-y-3">
       <div class="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h2 class="text-base font-semibold text-[var(--foreground)]">✨ Best Upcoming Date Slots (Weekday Evenings 5–10 PM & Weekend Daytime/Evenings)</h2>
-          <p class="text-xs text-[var(--muted-foreground)]">Click any date card to inspect all courts below, or click a pink time badge to book that court directly.</p>
+          <h2 class="text-base font-semibold text-[var(--foreground)]">✨ Best Upcoming Prime Slots (Weekday Evenings 5–10 PM & Weekend Daytime/Evenings)</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">Tap any date card to inspect all courts below, or tap a pink time badge to book that court directly.</p>
         </div>
         <span id="prime-summary-badge" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-[var(--secondary)] text-[var(--secondary-foreground)]"></span>
       </div>
@@ -507,7 +507,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
         <div class="flex items-center justify-between flex-wrap gap-2">
           <h2 class="text-base font-semibold text-[var(--foreground)]">📅 5-Week Availability Calendar</h2>
           <div class="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block"></span> Prime Date Slot</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block"></span> Prime Slot</span>
             <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Daytime/Late Open</span>
           </div>
         </div>
@@ -635,14 +635,14 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
       mainLink.setAttribute("href", COMPACT_DATA.scheduleUrl);
       const sub = document.getElementById("subtitle-meta");
       const plan = COMPACT_DATA.plans[state.players];
-      sub.textContent = "Category: " + COMPACT_DATA.category + " • Active Option: " + plan.name + " (" + plan.dur + " min, $" + plan.price + ") • Crawled " + COMPACT_DATA.crawledAt.slice(0, 16).replace("T", " ") + " UTC";
+      sub.textContent = "Category: " + COMPACT_DATA.category + " • Active Option: " + plan.name + " (" + plan.dur + " min, $" + plan.price + ") • Updated " + COMPACT_DATA.crawledAt.slice(0, 16).replace("T", " ") + " UTC";
     }}
 
     function renderControls() {{
       const playerTabs = document.getElementById("player-tabs");
       playerTabs.replaceChildren();
       const playerLabels = {{
-        "2": "💑 2 Players (45m · $45.76)",
+        "2": "👥 2 Players (45m · $45.76)",
         "3": "🏸 3 Players (60m · $68.44)",
         "4": "🔥 4 Players (90m · $91.52)"
       }};
@@ -667,7 +667,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
       timeTabs.replaceChildren();
       const timeOptions = [
         {{ id: "all", label: "All Times" }},
-        {{ id: "prime", label: "💖 Prime Date Slots" }},
+        {{ id: "prime", label: "✨ Prime Slots" }},
         {{ id: "evening", label: "🌙 Evenings (5–10 PM)" }},
         {{ id: "weekend", label: "🌟 Weekends Only" }}
       ];
@@ -721,7 +721,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
           d.isWeekend
             ? "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-pink-500/15 text-pink-500"
             : "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[var(--secondary)] text-[var(--secondary-foreground)]",
-          d.isWeekend ? "Weekend Date" : "Weekday Eve"
+          d.isWeekend ? "Weekend" : "Weekday Eve"
         );
         topRow.appendChild(title);
         topRow.appendChild(tag);
@@ -755,7 +755,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
       days.forEach(d => {{ dayMap[d.date] = d; }});
 
       const firstDate = new Date(days[0].date + "T12:00:00Z");
-      const firstDow = (firstDate.getUTCDay() + 6) % 7; // Monday = 0
+      const firstDow = (firstDate.getUTCDay() + 6) % 7;
       const startDt = new Date(firstDate);
       startDt.setUTCDate(startDt.getUTCDate() - firstDow);
 
@@ -854,7 +854,7 @@ def generate_html_calendar(data: dict[str, Any]) -> str:
         const timeWrap = el("div", "flex items-center gap-2 flex-wrap");
         timeWrap.appendChild(el("span", "text-sm font-bold text-[var(--foreground)]", slot.time12 + " – " + slot.endTime12));
         if (slot.isPrimeDateSlot) {{
-          timeWrap.appendChild(el("span", "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-pink-500 text-white", "💖 Prime Date Time"));
+          timeWrap.appendChild(el("span", "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-pink-500 text-white", "✨ Prime Time"));
         }}
         header.appendChild(timeWrap);
         header.appendChild(el("span", "text-xs font-medium text-[var(--muted-foreground)]", slot.courtsCount + (slot.courtsCount === 1 ? " court open" : " courts open")));
