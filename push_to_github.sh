@@ -5,16 +5,16 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
 
 DEFAULT_GH_USER="Harrypotterrrr"
-DEFAULT_REPO_NAME="badminton-withu"
+DEFAULT_REPO_NAME="happy-badminton"
 
 echo "============================================================"
-echo "  🚀 GitHub Pages Public Web Deployer (badminton-withu)"
+echo "  🚀 GitHub Pages Public Web Deployer (happy-badminton)"
 echo "============================================================"
 echo "Note: For free GitHub accounts, GitHub Pages requires the"
 echo "repository to be Public (or GitHub Pro for Private repos)."
 echo "If using a Fine-grained PAT, ensure 'Administration: Read/Write',"
 echo "'Pages: Read/Write', and 'Contents: Read/Write' are enabled"
-echo "(or use a Classic PAT with 'repo' scope)."
+echo "(or use a Classic PAT with 'repo' + 'workflow' scopes)."
 echo "------------------------------------------------------------"
 
 read -rp "GitHub Username [${DEFAULT_GH_USER}]: " GH_USER
@@ -43,7 +43,15 @@ if [[ -z "$GH_TOKEN" ]]; then
   exit 1
 fi
 
-echo "Updating repository '${GH_USER}/${REPO_NAME}' visibility (private=${IS_PRIVATE})..."
+echo "Ensuring repository '${GH_USER}/${REPO_NAME}' exists on GitHub..."
+curl -sS -o /dev/null \
+  -X POST "https://api.github.com/user/repos" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -K <(printf 'header = "Authorization: Bearer %s"\n' "$GH_TOKEN") \
+  -d "$(printf '{"name":"%s","private":%s,"description":"NYBC Flushing Badminton Court Availability Calendar"}' "$REPO_NAME" "$IS_PRIVATE")" || true
+
+echo "Setting repository '${GH_USER}/${REPO_NAME}' visibility (private=${IS_PRIVATE})..."
 PATCH_STATUS=$(curl -sS -o /tmp/gh_patch_resp.json -w "%{http_code}" \
   -X PATCH "https://api.github.com/repos/${GH_USER}/${REPO_NAME}" \
   -H "Accept: application/vnd.github+json" \
@@ -52,10 +60,9 @@ PATCH_STATUS=$(curl -sS -o /tmp/gh_patch_resp.json -w "%{http_code}" \
   -d "$(printf '{"private":%s}' "$IS_PRIVATE")")
 
 if [[ "$PATCH_STATUS" != "200" ]]; then
-  echo "Warning: Could not auto-update repo visibility (HTTP ${PATCH_STATUS})."
-  echo "  If you are on GitHub Free and the repo is currently Private, you may need"
-  echo "  to enable 'Administration: Read and write' on your token or switch the"
-  echo "  repo to Public under Settings -> Danger Zone -> Change visibility."
+  echo "Note: Could not auto-update repo visibility via API (HTTP ${PATCH_STATUS})."
+  echo "  If you are on GitHub Free and the repo is Private, switch it to Public at:"
+  echo "  https://github.com/${GH_USER}/${REPO_NAME}/settings"
 fi
 rm -f /tmp/gh_patch_resp.json
 
@@ -94,7 +101,7 @@ if [[ "$PAGES_STATUS" == "201" || "$PAGES_STATUS" == "409" ]]; then
   echo "GitHub Pages is enabled!"
 else
   echo "Note: GitHub Pages API returned HTTP ${PAGES_STATUS}."
-  echo "  You can also enable it manually in 2 clicks at:"
+  echo "  Enable it in 2 clicks at:"
   echo "  https://github.com/${GH_USER}/${REPO_NAME}/settings/pages"
   echo "  (Under 'Build and deployment' -> Branch -> select 'main' and click Save)"
 fi
