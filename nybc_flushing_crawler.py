@@ -625,9 +625,10 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         pageTitle: "NYBC 法拉盛羽毛球场地空场表",
         homepageBtn: "个人主页 · Haolin ↗",
         refreshBtn: "刷新数据",
-        refreshingBtn: "正在同步...",
-        refreshSuccessPrefix: "已同步最新数据 (",
-        refreshTriggerLink: "去 GitHub 触发即时抓取 ↗",
+        refreshingBtn: "正在实时抓取...",
+        refreshProgressMsg: "正在触发 GitHub 实时抓取 NYBC 最新空场 (~10秒)...",
+        refreshSuccessPrefix: "已实时同步最新数据 (",
+        refreshTriggerLink: "",
         langToggleBtn: "EN",
         themeLight: "浅色",
         themeDark: "深色",
@@ -659,7 +660,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         zeroMatch: "无空场",
         zeroMatchShort: "0场",
         closedLabel: "—",
-        footerNote: "每 2 小时由 GitHub Actions 自动同步 NYBC 法拉盛球馆空场数据 · 所有预约链接均直达按人数预约 (NYBC)",
+        footerNote: "每天 9:00–23:00 (EST) 每 2 小时自动更新 · 点击「刷新数据」自动触发 GitHub 实时抓取并同步",
         courtNames: {{
           "Court 1": "1号场",
           "Court 2": "2号场",
@@ -678,9 +679,10 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         pageTitle: "NYBC Flushing Court Availability",
         homepageBtn: "Haolin's Homepage ↗",
         refreshBtn: "Refresh",
-        refreshingBtn: "Syncing...",
-        refreshSuccessPrefix: "Synced latest schedule (",
-        refreshTriggerLink: "Run live crawler on GitHub ↗",
+        refreshingBtn: "Crawling live...",
+        refreshProgressMsg: "Crawling live NYBC data via GitHub (~10s)...",
+        refreshSuccessPrefix: "Synced live schedule (",
+        refreshTriggerLink: "",
         langToggleBtn: "中文",
         themeLight: "Light",
         themeDark: "Dark",
@@ -712,7 +714,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         zeroMatch: "0 open",
         zeroMatchShort: "0",
         closedLabel: "—",
-        footerNote: "Auto-updated every 2 hours via GitHub Actions · Direct links locked to Reservation by # of players (NYBC)",
+        footerNote: "Auto-updated every 2 hours (9 AM – 11 PM EST) · Click Refresh to trigger live crawl & sync",
         courtNames: {{}}
       }}
     }};
@@ -965,6 +967,27 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       return compact;
     }}
 
+    const NTFY_REFRESH_URL = "https://ntfy.sh/nybc-flushing-refresh-7f8a9b2c";
+
+    function getNyHour() {{
+      try {{
+        const hStr = new Intl.DateTimeFormat("en-US", {{
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          hour12: false
+        }}).format(new Date());
+        const h = parseInt(hStr, 10);
+        return h === 24 ? 0 : h;
+      }} catch (_e) {{
+        return 12;
+      }}
+    }}
+
+    function isNyActiveWindow() {{
+      const h = getNyHour();
+      return h >= 9 && h < 23;
+    }}
+
     async function getCandidateJsonUrls() {{
       const urls = [];
       try {{
@@ -992,13 +1015,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       return urls;
     }}
 
-    async function refreshScheduleData(silent = false) {{
-      if (state.isRefreshing) return;
-      state.isRefreshing = true;
-      if (!silent) renderStaticText();
-      const statusEl = document.getElementById("refresh-status");
-      const triggerEl = document.getElementById("actions-trigger-link");
-
+    async function pullLatestFromGitHub() {{
       const candidateUrls = await getCandidateJsonUrls();
       let bestRawJson = null;
       let bestTime = new Date(COMPACT_DATA.crawledAt || 0).getTime() || 0;
@@ -1015,7 +1032,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
                 bestRawJson = rawJson;
                 bestTime = rawTime;
               }}
-              // Commit-SHA URL is first and guaranteed uncached
               if (fetchUrl.includes("raw.githubusercontent.com/Harrypotterrrr/happy-badminton/") && !fetchUrl.includes("/main/")) {{
                 break;
               }}
@@ -1029,18 +1045,57 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       if (bestRawJson) {{
         COMPACT_DATA = convertRawJsonToCompact(bestRawJson);
       }}
+      return new Date(COMPACT_DATA.crawledAt || 0).getTime() || 0;
+    }}
+
+    async function refreshScheduleData(silent = false) {{
+      if (state.isRefreshing) return;
+      const statusEl = document.getElementById("refresh-status");
+      const triggerEl = document.getElementById("actions-trigger-link");
+      triggerEl.classList.add("hidden");
+
+      if (silent) {{
+        const latestTime = await pullLatestFromGitHub();
+        renderAll();
+        // If current time is between 9 AM and 11 PM EST and data is >= 2 hours old, auto-trigger live crawl
+        if (isNyActiveWindow() && Date.now() - latestTime >= 2 * 3600 * 1000) {{
+          refreshScheduleData(false);
+        }}
+        return;
+      }}
+
+      state.isRefreshing = true;
+      renderStaticText();
+      const dict = t();
+      statusEl.textContent = dict.refreshProgressMsg;
+      statusEl.classList.remove("hidden");
+
+      const beforeTime = new Date(COMPACT_DATA.crawledAt || 0).getTime() || 0;
+
+      // Trigger live NYBC crawl & GitHub update automatically
+      try {{
+        fetch(NTFY_REFRESH_URL, {{
+          method: "POST",
+          body: "refresh:" + Date.now(),
+          mode: "cors"
+        }}).catch(() => {{}});
+      }} catch (_e) {{}}
+
+      // Poll GitHub commits for the newly crawled availability JSON (takes ~8-15s)
+      for (let attempt = 0; attempt < 10; attempt++) {{
+        await new Promise(r => setTimeout(r, 2500));
+        const latestTime = await pullLatestFromGitHub();
+        if (latestTime > beforeTime || (attempt >= 1 && Date.now() - latestTime < 45000)) {{
+          break;
+        }}
+      }}
 
       state.isRefreshing = false;
       renderAll();
 
-      if (!silent) {{
-        const dict = t();
-        const updatedEst = formatUpdatedEst(COMPACT_DATA.crawledAt);
-        statusEl.textContent = dict.refreshSuccessPrefix + updatedEst + ")";
-        statusEl.classList.remove("hidden");
-        triggerEl.textContent = dict.refreshTriggerLink;
-        triggerEl.classList.remove("hidden");
-      }}
+      const updatedEst = formatUpdatedEst(COMPACT_DATA.crawledAt);
+      statusEl.textContent = t().refreshSuccessPrefix + updatedEst + ")";
+      statusEl.classList.remove("hidden");
     }}
 
     function filterCourt(courtObj) {{
@@ -1520,6 +1575,11 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     renderAll();
     refreshScheduleData(true);
+    setInterval(() => {{
+      if (isNyActiveWindow()) {{
+        refreshScheduleData(true);
+      }}
+    }}, 5 * 60 * 1000);
   </script>
 </body>
 </html>

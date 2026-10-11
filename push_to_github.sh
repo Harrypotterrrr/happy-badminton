@@ -6,6 +6,17 @@ cd "$REPO_DIR"
 
 DEFAULT_GH_USER="Harrypotterrrr"
 DEFAULT_REPO_NAME="happy-badminton"
+ENV_DIR="${HOME}/.config/nybc-badminton"
+ENV_FILE="${ENV_DIR}/github.env"
+
+SAVED_TOKEN=""
+if [[ -f "$ENV_FILE" ]]; then
+  # shellcheck disable=SC1090
+  source "$ENV_FILE" || true
+  DEFAULT_GH_USER="${GH_USER:-$DEFAULT_GH_USER}"
+  DEFAULT_REPO_NAME="${REPO_NAME:-$DEFAULT_REPO_NAME}"
+  SAVED_TOKEN="${GH_TOKEN:-}"
+fi
 
 echo "============================================================"
 echo "  🚀 GitHub Pages Public Web Deployer (happy-badminton)"
@@ -13,15 +24,15 @@ echo "============================================================"
 echo "Note: For free GitHub accounts, GitHub Pages requires the"
 echo "repository to be Public (or GitHub Pro for Private repos)."
 echo "If using a Fine-grained PAT, ensure 'Administration: Read/Write',"
-echo "'Pages: Read/Write', and 'Contents: Read/Write' are enabled"
-echo "(or use a Classic PAT with 'repo' + 'workflow' scopes)."
+echo "'Pages: Read/Write', 'Actions: Read/Write', and 'Contents: Read/Write'"
+echo "are enabled (or use a Classic PAT with 'repo' + 'workflow' scopes)."
 echo "------------------------------------------------------------"
 
-read -rp "GitHub Username [${DEFAULT_GH_USER}]: " GH_USER
-GH_USER="${GH_USER:-$DEFAULT_GH_USER}"
+read -rp "GitHub Username [${DEFAULT_GH_USER}]: " GH_USER_INPUT
+GH_USER="${GH_USER_INPUT:-$DEFAULT_GH_USER}"
 
-read -rp "Repository Name [${DEFAULT_REPO_NAME}]: " REPO_NAME
-REPO_NAME="${REPO_NAME:-$DEFAULT_REPO_NAME}"
+read -rp "Repository Name [${DEFAULT_REPO_NAME}]: " REPO_NAME_INPUT
+REPO_NAME="${REPO_NAME_INPUT:-$DEFAULT_REPO_NAME}"
 
 echo ""
 echo "Choose repository visibility for GitHub Pages:"
@@ -36,12 +47,28 @@ else
   IS_PRIVATE="false"
 fi
 
-read -rsp "GitHub Personal Access Token (input hidden): " GH_TOKEN
-echo ""
+if [[ -n "$SAVED_TOKEN" ]]; then
+  read -rsp "GitHub Personal Access Token [press Enter to reuse saved token]: " GH_TOKEN_INPUT
+  echo ""
+  GH_TOKEN="${GH_TOKEN_INPUT:-$SAVED_TOKEN}"
+else
+  read -rsp "GitHub Personal Access Token (input hidden): " GH_TOKEN
+  echo ""
+fi
+
 if [[ -z "$GH_TOKEN" ]]; then
   echo "Error: Token cannot be empty." >&2
   exit 1
 fi
+
+mkdir -p "$ENV_DIR"
+chmod 700 "$ENV_DIR"
+cat > "$ENV_FILE" <<EOF
+GH_USER='${GH_USER}'
+REPO_NAME='${REPO_NAME}'
+GH_TOKEN='${GH_TOKEN}'
+EOF
+chmod 600 "$ENV_FILE"
 
 echo "Ensuring repository '${GH_USER}/${REPO_NAME}' exists on GitHub..."
 curl -sS -o /dev/null \
@@ -99,6 +126,47 @@ echo "Pushing latest 'main' branch to ${REMOTE_URL}..."
 GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
   git push --force-with-lease -u origin main
 
+echo "Refreshing GitHub Actions 2-hour schedule (9 AM - 11 PM EST)..."
+curl -sS -o /dev/null -X PUT \
+  "https://api.github.com/repos/${GH_USER}/${REPO_NAME}/actions/workflows/update_calendar.yml/disable" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -K <(printf 'header = "Authorization: Bearer %s"\n' "$GH_TOKEN") || true
+curl -sS -o /dev/null -X PUT \
+  "https://api.github.com/repos/${GH_USER}/${REPO_NAME}/actions/workflows/update_calendar.yml/enable" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -K <(printf 'header = "Authorization: Bearer %s"\n' "$GH_TOKEN") || true
+
+echo "Starting background auto-updater service (2h schedule 9am-11pm EST + instant web Refresh button listener)..."
+SYSTEMD_USER_DIR="${HOME}/.config/systemd/user"
+mkdir -p "$SYSTEMD_USER_DIR"
+cat > "${SYSTEMD_USER_DIR}/nybc-auto-updater.service" <<EOF
+[Unit]
+Description=NYBC Flushing Badminton Auto-Updater (9am-11pm EST 2h & Web Refresh Listener)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=${REPO_DIR}
+ExecStart=/usr/bin/python3 ${REPO_DIR}/nybc_auto_daemon.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+
+if systemctl --user daemon-reload >/dev/null 2>&1; then
+  systemctl --user enable --now nybc-auto-updater.service >/dev/null 2>&1 || true
+  systemctl --user restart nybc-auto-updater.service >/dev/null 2>&1 || true
+  echo "Background service 'nybc-auto-updater.service' is active!"
+else
+  pkill -f "nybc_auto_daemon.py" >/dev/null 2>&1 || true
+  nohup python3 "${REPO_DIR}/nybc_auto_daemon.py" >/dev/null 2>&1 &
+  echo "Background daemon 'nybc_auto_daemon.py' started!"
+fi
+
 echo "Enabling GitHub Pages on branch 'main'..."
 PAGES_STATUS=$(curl -sS -o /tmp/gh_pages_resp.json -w "%{http_code}" \
   -X POST "https://api.github.com/repos/${GH_USER}/${REPO_NAME}/pages" \
@@ -122,5 +190,6 @@ echo ""
 echo "============================================================"
 echo "✅ Ready! Share this public link with your crush:"
 echo "   🌐 ${PUBLIC_URL}"
-echo "   (Takes ~60 seconds after enabling GitHub Pages to go live)"
+echo "   (Auto-updates every 2h from 9 AM to 11 PM EST, and clicking"
+echo "    '刷新数据' on the website now crawls & syncs automatically!)"
 echo "============================================================"
