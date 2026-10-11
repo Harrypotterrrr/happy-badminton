@@ -965,39 +965,82 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       return compact;
     }}
 
-    async function refreshScheduleData() {{
+    async function getCandidateJsonUrls() {{
+      const urls = [];
+      try {{
+        const apiResp = await fetch(
+          "https://api.github.com/repos/Harrypotterrrr/happy-badminton/commits/main?_=" + Date.now(),
+          {{ cache: "no-store", headers: {{ Accept: "application/vnd.github.v3+json" }} }}
+        );
+        if (apiResp.ok) {{
+          const commitData = await apiResp.json();
+          if (commitData && commitData.sha) {{
+            urls.push(
+              "https://raw.githubusercontent.com/Harrypotterrrr/happy-badminton/" +
+                commitData.sha +
+                "/nybc_flushing_availability.json"
+            );
+          }}
+        }}
+      }} catch (_err) {{
+        // Ignore GitHub API error and fall back to standard URLs
+      }}
+      RAW_JSON_URLS.forEach(u => {{
+        const sep = u.includes("?") ? "&" : "?";
+        urls.push(u + sep + "_=" + Date.now());
+      }});
+      return urls;
+    }}
+
+    async function refreshScheduleData(silent = false) {{
       if (state.isRefreshing) return;
       state.isRefreshing = true;
-      renderStaticText();
+      if (!silent) renderStaticText();
       const statusEl = document.getElementById("refresh-status");
       const triggerEl = document.getElementById("actions-trigger-link");
 
-      let updated = false;
-      for (const baseUrl of RAW_JSON_URLS) {{
+      const candidateUrls = await getCandidateJsonUrls();
+      let bestRawJson = null;
+      let bestTime = new Date(COMPACT_DATA.crawledAt || 0).getTime() || 0;
+
+      for (const fetchUrl of candidateUrls) {{
         try {{
-          const sep = baseUrl.includes("?") ? "&" : "?";
-          const resp = await fetch(baseUrl + sep + "_=" + Date.now(), {{ cache: "no-store" }});
+          const resp = await fetch(fetchUrl, {{ cache: "no-store" }});
           if (!resp.ok) continue;
           const rawJson = await resp.json();
           if (rawJson && rawJson.availabilityByPlayers) {{
-            COMPACT_DATA = convertRawJsonToCompact(rawJson);
-            updated = true;
-            break;
+            const rawTime = new Date(rawJson.crawledAt || 0).getTime() || 0;
+            if (rawTime >= bestTime || !bestRawJson) {{
+              if (rawTime >= bestTime) {{
+                bestRawJson = rawJson;
+                bestTime = rawTime;
+              }}
+              // Commit-SHA URL is first and guaranteed uncached
+              if (fetchUrl.includes("raw.githubusercontent.com/Harrypotterrrr/happy-badminton/") && !fetchUrl.includes("/main/")) {{
+                break;
+              }}
+            }}
           }}
         }} catch (_err) {{
           // Try next fallback URL
         }}
       }}
 
+      if (bestRawJson) {{
+        COMPACT_DATA = convertRawJsonToCompact(bestRawJson);
+      }}
+
       state.isRefreshing = false;
       renderAll();
 
-      const dict = t();
-      const updatedEst = formatUpdatedEst(COMPACT_DATA.crawledAt);
-      statusEl.textContent = dict.refreshSuccessPrefix + updatedEst + ")";
-      statusEl.classList.remove("hidden");
-      triggerEl.textContent = dict.refreshTriggerLink;
-      triggerEl.classList.remove("hidden");
+      if (!silent) {{
+        const dict = t();
+        const updatedEst = formatUpdatedEst(COMPACT_DATA.crawledAt);
+        statusEl.textContent = dict.refreshSuccessPrefix + updatedEst + ")";
+        statusEl.classList.remove("hidden");
+        triggerEl.textContent = dict.refreshTriggerLink;
+        triggerEl.classList.remove("hidden");
+      }}
     }}
 
     function filterCourt(courtObj) {{
@@ -1462,7 +1505,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     }});
 
     document.getElementById("refresh-btn").addEventListener("click", () => {{
-      refreshScheduleData();
+      refreshScheduleData(false);
     }});
 
     document.getElementById("lang-toggle").addEventListener("click", () => {{
@@ -1476,6 +1519,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     }});
 
     renderAll();
+    refreshScheduleData(true);
   </script>
 </body>
 </html>

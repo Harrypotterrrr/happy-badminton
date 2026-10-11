@@ -89,6 +89,12 @@ echo "Syncing with remote 'main' branch on ${REMOTE_URL}..."
 GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
   git fetch origin main || true
 
+echo "Crawling latest live NYBC Flushing court availability..."
+if python3 nybc_flushing_crawler.py --players 2 3 4 --days 35 --out-dir .; then
+  git add index.html nybc_flushing_calendar.html nybc_flushing_calendar.md nybc_flushing_availability.json
+  git diff --staged --quiet || git commit -m "chore: update NYBC Flushing court availability"
+fi
+
 echo "Pushing latest 'main' branch to ${REMOTE_URL}..."
 GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
   git push --force-with-lease -u origin main

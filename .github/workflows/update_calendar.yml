@@ -3,7 +3,7 @@ name: Update NYBC Flushing Availability Calendar
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '*/30 * * * *'
 
 permissions:
   contents: write
