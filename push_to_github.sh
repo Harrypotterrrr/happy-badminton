@@ -85,9 +85,13 @@ case "$1" in
 esac
 EOF
 
+echo "Syncing with remote 'main' branch on ${REMOTE_URL}..."
+GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
+  git fetch origin main || true
+
 echo "Pushing latest 'main' branch to ${REMOTE_URL}..."
 GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
-  git push -u origin main
+  git push --force-with-lease -u origin main
 
 echo "Enabling GitHub Pages on branch 'main'..."
 PAGES_STATUS=$(curl -sS -o /tmp/gh_pages_resp.json -w "%{http_code}" \
