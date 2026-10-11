@@ -430,26 +430,26 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       else """
   <style>
     :root {
-      --background: #fafaf9;
-      --foreground: #111827;
+      --background: #f1f5f9;
+      --foreground: #0f172a;
       --card: #ffffff;
-      --border: #e5e7eb;
-      --muted-foreground: #6b7280;
+      --border: #94a3b8;
+      --muted-foreground: #475569;
       --primary: #1b4332;
       --primary-foreground: #ffffff;
-      --secondary: #f3f4f6;
-      --secondary-foreground: #1f2937;
+      --secondary: #e2e8f0;
+      --secondary-foreground: #0f172a;
     }
     html.dark {
-      --background: #0c0d0e;
-      --foreground: #f3f4f6;
-      --card: #141618;
-      --border: #26292e;
-      --muted-foreground: #9ca3af;
+      --background: #090b0d;
+      --foreground: #f8fafc;
+      --card: #121519;
+      --border: #3f4756;
+      --muted-foreground: #94a3b8;
       --primary: #2d6a4f;
       --primary-foreground: #ffffff;
-      --secondary: #1f2226;
-      --secondary-foreground: #e5e7eb;
+      --secondary: #1e232a;
+      --secondary-foreground: #f1f5f9;
     }
   </style>"""
   )
@@ -464,56 +464,56 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 <body class="bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 space-y-6">
     <!-- Top Masthead -->
-    <header class="border-b border-[var(--border)] pb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+    <header class="border-b-[1.8px] border-[var(--border)] pb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
       <div class="space-y-1.5">
         <div class="flex items-center gap-2 text-xs text-[var(--muted-foreground)] tracking-wide">
-          <span id="header-category" class="font-medium text-[var(--foreground)]"></span>
+          <span id="header-category" class="font-semibold text-[var(--foreground)]"></span>
           <span>·</span>
-          <span id="header-location"></span>
+          <span id="header-location" class="font-medium"></span>
         </div>
-        <h1 id="page-title" class="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--foreground)]"></h1>
+        <h1 id="page-title" class="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]"></h1>
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--muted-foreground)] tabular-nums">
-          <span id="subtitle-meta"></span>
-          <span id="refresh-status" class="text-emerald-700 dark:text-emerald-400 font-medium hidden"></span>
+          <span id="subtitle-meta" class="font-medium"></span>
+          <span id="refresh-status" class="text-emerald-700 dark:text-emerald-400 font-semibold hidden"></span>
           <a id="actions-trigger-link" href="https://github.com/Harrypotterrrr/happy-badminton/actions/workflows/update_calendar.yml" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--foreground)] transition hidden"></a>
         </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
         <a id="homepage-link" href="https://harrypotterrrr.github.io" target="_blank" rel="noopener noreferrer"
-           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition">
+           class="px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition">
         </a>
         <button id="refresh-btn" type="button"
-           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center gap-1.5">
+           class="px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center gap-1.5">
           <span id="refresh-btn-text"></span>
         </button>
         <button id="lang-toggle" type="button"
-           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
+           class="px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
         </button>
         <button id="theme-toggle" type="button"
-           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
+           class="px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
         </button>
         <a id="main-schedule-link" target="_blank" rel="noopener noreferrer"
-           class="px-3.5 py-1.5 rounded-md text-xs font-medium bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
+           class="px-3.5 py-1.5 rounded-md text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] border-[1.5px] border-[var(--primary)] hover:opacity-90 transition">
         </a>
       </div>
     </header>
 
     <!-- Compact Filter Toolbar -->
-    <section class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5">
+    <section class="bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-3.5 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5">
       <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-        <span id="label-step-1" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></span>
-        <div id="player-tabs" class="inline-flex flex-wrap gap-1"></div>
+        <span id="label-step-1" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></span>
+        <div id="player-tabs" class="inline-flex flex-wrap gap-1.5"></div>
       </div>
 
       <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-        <span id="label-step-2" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></span>
-        <div id="time-filter-tabs" class="inline-flex flex-wrap gap-1"></div>
+        <span id="label-step-2" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></span>
+        <div id="time-filter-tabs" class="inline-flex flex-wrap gap-1.5"></div>
       </div>
 
       <div class="flex items-center gap-2">
-        <label id="label-step-3" for="court-select" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></label>
-        <select id="court-select" class="px-2.5 py-1.5 rounded-md text-xs bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] focus:outline-none">
+        <label id="label-step-3" for="court-select" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></label>
+        <select id="court-select" class="px-2.5 py-1.5 rounded-md text-xs font-medium bg-[var(--background)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] focus:outline-none">
         </select>
       </div>
     </section>
@@ -521,46 +521,46 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     <!-- Main Schedule Workspace: Calendar Matrix + Selected Day Sheet -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
       <!-- Left: 5-Week Calendar Grid -->
-      <section class="lg:col-span-7 bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
-        <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-[var(--border)]">
-          <h2 id="calendar-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
-          <div class="flex items-center gap-4 text-xs text-[var(--muted-foreground)]">
-            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span><span id="legend-prime"></span></span>
-            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span><span id="legend-regular"></span></span>
+      <section class="lg:col-span-7 bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-4 shadow-sm space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2 pb-2.5 border-b-[1.8px] border-[var(--border)]">
+          <h2 id="calendar-heading" class="text-sm font-bold text-[var(--foreground)]"></h2>
+          <div class="flex items-center gap-4 text-xs font-medium text-[var(--muted-foreground)]">
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span><span id="legend-prime"></span></span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span><span id="legend-regular"></span></span>
           </div>
         </div>
-        <div id="weekday-header" class="grid grid-cols-7 gap-1 text-center text-[11px] font-medium text-[var(--muted-foreground)] py-1">
+        <div id="weekday-header" class="grid grid-cols-7 gap-1.5 text-center text-xs font-semibold text-[var(--muted-foreground)] py-1">
         </div>
-        <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+        <div id="calendar-grid" class="grid grid-cols-7 gap-1.5"></div>
       </section>
 
       <!-- Right: Selected Day Time & Court Breakdown -->
-      <section class="lg:col-span-5 bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
-        <div class="border-b border-[var(--border)] pb-3 flex items-baseline justify-between gap-2">
+      <section class="lg:col-span-5 bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-4 shadow-sm space-y-3">
+        <div class="border-b-[1.8px] border-[var(--border)] pb-3 flex items-baseline justify-between gap-2">
           <div>
-            <h2 id="selected-date-title" class="text-base font-semibold text-[var(--foreground)]"></h2>
-            <p id="selected-date-subtitle" class="text-xs text-[var(--muted-foreground)] mt-0.5 tabular-nums"></p>
+            <h2 id="selected-date-title" class="text-base font-bold text-[var(--foreground)]"></h2>
+            <p id="selected-date-subtitle" class="text-xs font-medium text-[var(--muted-foreground)] mt-0.5 tabular-nums"></p>
           </div>
-          <span id="selected-date-badge" class="px-2 py-0.5 text-xs font-medium rounded bg-[var(--secondary)] text-[var(--secondary-foreground)] tabular-nums shrink-0"></span>
+          <span id="selected-date-badge" class="px-2.5 py-0.5 text-xs font-semibold rounded border border-[var(--border)] bg-[var(--secondary)] text-[var(--secondary-foreground)] tabular-nums shrink-0"></span>
         </div>
-        <div id="slots-list" class="divide-y divide-[var(--border)] max-h-[540px] overflow-y-auto pr-1"></div>
+        <div id="slots-list" class="space-y-2.5 max-h-[540px] overflow-y-auto pr-1"></div>
       </section>
     </div>
 
     <!-- Prime Slots Directory (Strictly Fri/Sat/Sun 4:00 PM – 9:00 PM, positioned under Calendar) -->
-    <section class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
-      <div class="flex items-baseline justify-between flex-wrap gap-2 border-b border-[var(--border)] pb-2.5">
+    <section class="bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-4 shadow-sm space-y-3">
+      <div class="flex items-baseline justify-between flex-wrap gap-2 border-b-[1.8px] border-[var(--border)] pb-2.5">
         <div>
-          <h2 id="prime-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
-          <p id="prime-desc" class="text-xs text-[var(--muted-foreground)] mt-0.5"></p>
+          <h2 id="prime-heading" class="text-sm font-bold text-[var(--foreground)]"></h2>
+          <p id="prime-desc" class="text-xs font-medium text-[var(--muted-foreground)] mt-0.5"></p>
         </div>
-        <span id="prime-summary-badge" class="text-xs font-medium text-[var(--muted-foreground)] tabular-nums"></span>
+        <span id="prime-summary-badge" class="text-xs font-semibold text-[var(--muted-foreground)] tabular-nums"></span>
       </div>
       <div id="prime-picks-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
     </section>
 
     <!-- Footer -->
-    <footer class="pt-2 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--muted-foreground)]">
+    <footer class="pt-3 border-t-[1.8px] border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-medium text-[var(--muted-foreground)]">
       <span id="footer-note"></span>
       <div class="flex items-center gap-4">
         <a id="footer-homepage" href="https://harrypotterrrr.github.io" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--foreground)] underline transition"></a>
@@ -578,27 +578,27 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     ];
 
     const LIGHT_VARS = {{
-      "--background": "#fafaf9",
-      "--foreground": "#111827",
+      "--background": "#f1f5f9",
+      "--foreground": "#0f172a",
       "--card": "#ffffff",
-      "--border": "#e5e7eb",
-      "--muted-foreground": "#6b7280",
+      "--border": "#94a3b8",
+      "--muted-foreground": "#475569",
       "--primary": "#1b4332",
       "--primary-foreground": "#ffffff",
-      "--secondary": "#f3f4f6",
-      "--secondary-foreground": "#1f2937"
+      "--secondary": "#e2e8f0",
+      "--secondary-foreground": "#0f172a"
     }};
 
     const DARK_VARS = {{
-      "--background": "#0c0d0e",
-      "--foreground": "#f3f4f6",
-      "--card": "#141618",
-      "--border": "#26292e",
-      "--muted-foreground": "#9ca3af",
+      "--background": "#090b0d",
+      "--foreground": "#f8fafc",
+      "--card": "#121519",
+      "--border": "#3f4756",
+      "--muted-foreground": "#94a3b8",
       "--primary": "#2d6a4f",
       "--primary-foreground": "#ffffff",
-      "--secondary": "#1f2226",
-      "--secondary-foreground": "#e5e7eb"
+      "--secondary": "#1e232a",
+      "--secondary-foreground": "#f1f5f9"
     }};
 
     const I18N = {{
@@ -1062,7 +1062,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const wkHeader = document.getElementById("weekday-header");
       wkHeader.replaceChildren();
       dict.weekdays.forEach((wName, idx) => {{
-        wkHeader.appendChild(el("div", idx >= 4 ? "text-[var(--foreground)] font-semibold" : "", wName));
+        wkHeader.appendChild(el("div", idx >= 4 ? "text-[var(--foreground)] font-bold" : "", wName));
       }});
     }}
 
@@ -1075,8 +1075,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const btn = el(
           "button",
           active
-            ? "px-2.5 py-1 rounded text-xs font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition cursor-pointer tabular-nums"
-            : "px-2.5 py-1 rounded text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-80 transition cursor-pointer tabular-nums",
+            ? "px-2.5 py-1 rounded text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] border-[1.5px] border-[var(--primary)] transition cursor-pointer tabular-nums"
+            : "px-2.5 py-1 rounded text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] border-[1.5px] border-[var(--border)] hover:opacity-85 transition cursor-pointer tabular-nums",
           formatPlayerButtonLabel(pKey, plan)
         );
         btn.addEventListener("click", () => {{
@@ -1100,8 +1100,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const btn = el(
           "button",
           active
-            ? "px-2.5 py-1 rounded text-xs font-medium bg-[var(--foreground)] text-[var(--background)] transition cursor-pointer"
-            : "px-2.5 py-1 rounded text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-80 transition cursor-pointer",
+            ? "px-2.5 py-1 rounded text-xs font-semibold bg-[var(--foreground)] text-[var(--card)] border-[1.5px] border-[var(--foreground)] transition cursor-pointer"
+            : "px-2.5 py-1 rounded text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] border-[1.5px] border-[var(--border)] hover:opacity-85 transition cursor-pointer",
           opt.label
         );
         btn.addEventListener("click", () => {{
@@ -1132,7 +1132,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const isSelected = state.selectedDate === d.date;
         const card = el(
           "div",
-          "p-3 rounded-md border " + (isSelected ? "border-[var(--foreground)] bg-[var(--secondary)]/40" : "border-[var(--border)] bg-[var(--background)]") + " hover:border-[var(--foreground)]/50 transition cursor-pointer flex flex-col justify-between gap-2.5"
+          "p-3 rounded-md border-[1.6px] " + (isSelected ? "border-[var(--primary)] bg-[var(--primary)]/10 shadow-sm" : "border-[var(--border)] bg-[var(--background)]/80 hover:border-[var(--foreground)]") + " transition cursor-pointer flex flex-col justify-between gap-2.5"
         );
         card.addEventListener("click", () => {{
           state.selectedDate = d.date;
@@ -1140,22 +1140,22 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         }});
 
         const topRow = el("div", "flex items-center justify-between gap-1");
-        const title = el("span", "text-xs font-semibold text-[var(--foreground)]", formatDateShort(d.date));
+        const title = el("span", "text-xs font-bold text-[var(--foreground)]", formatDateShort(d.date));
         const tag = el(
           "span",
-          "px-1.5 py-0.5 text-[10px] font-medium rounded bg-amber-500/15 text-amber-800 dark:text-amber-300",
+          "px-1.5 py-0.5 text-[10px] font-semibold rounded border border-amber-600/40 bg-amber-500/20 text-amber-900 dark:text-amber-200",
           d.isWeekend ? dict.weekendTag : dict.fridayTag
         );
         topRow.appendChild(title);
         topRow.appendChild(tag);
         card.appendChild(topRow);
 
-        const chipsWrap = el("div", "flex flex-wrap gap-1");
+        const chipsWrap = el("div", "flex flex-wrap gap-1.5");
         const primeSlots = d.filteredSlots.filter(s => s.isPrimeDateSlot);
         primeSlots.forEach(s => {{
           const link = el(
             "a",
-            "px-2 py-0.5 text-[11px] font-medium tabular-nums rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
+            "px-2 py-0.5 text-[11px] font-semibold tabular-nums rounded border-[1.5px] border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] shadow-[0_1px_1px_rgba(0,0,0,0.04)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
             s.timeFormatted + "–" + s.endTimeFormatted + " (" + formatCourtsCountBadge(s.courtsCount) + ")"
           );
           link.setAttribute("href", s.courts[0].bookingUrl);
@@ -1194,8 +1194,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const isFirstOrStart = iso === days[0].date;
 
         if (!dayData) {{
-          const emptyCell = el("div", "p-2 rounded border border-transparent opacity-35 min-h-[68px] flex flex-col justify-between");
-          emptyCell.appendChild(el("span", "text-xs text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false)));
+          const emptyCell = el("div", "p-2 rounded-md border-[1.5px] border-dashed border-[var(--border)]/55 bg-[var(--background)]/60 opacity-50 min-h-[70px] flex flex-col justify-between");
+          emptyCell.appendChild(el("span", "text-xs font-medium text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false)));
           emptyCell.appendChild(el("span", "text-[10px] text-[var(--muted-foreground)]", dict.closedLabel));
           grid.appendChild(emptyCell);
           continue;
@@ -1205,11 +1205,15 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const count = dayData.filteredSlots.length;
         const primeCount = dayData.filteredPrimeCount;
 
-        let cellClasses = "p-2 rounded border min-h-[68px] flex flex-col justify-between text-left transition cursor-pointer ";
+        let cellClasses = "p-2 rounded-md min-h-[70px] flex flex-col justify-between text-left transition cursor-pointer ";
         if (isSelected) {{
-          cellClasses += "border-[var(--foreground)] bg-[var(--secondary)]/70";
+          cellClasses += "border-[2px] border-[var(--primary)] bg-[var(--primary)]/12 shadow-sm";
+        }} else if (primeCount > 0) {{
+          cellClasses += "border-[1.6px] border-amber-600/70 bg-amber-500/[0.08] hover:border-[var(--foreground)]";
+        }} else if (count > 0) {{
+          cellClasses += "border-[1.6px] border-[var(--border)] bg-[var(--background)]/80 hover:bg-[var(--secondary)]/70 hover:border-[var(--foreground)]";
         }} else {{
-          cellClasses += "border-[var(--border)] bg-[var(--background)] hover:border-[var(--foreground)]/40";
+          cellClasses += "border-[1.5px] border-[var(--border)]/70 bg-[var(--background)]/40 opacity-70 hover:border-[var(--foreground)]/50";
         }}
 
         const cell = el("button", cellClasses);
@@ -1222,24 +1226,24 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const top = el("div", "flex items-center justify-between w-full");
         const dateLabel = el(
           "span",
-          "text-xs tabular-nums " + (isSelected || dayData.isFriSatSun ? "font-semibold text-[var(--foreground)]" : "font-medium text-[var(--muted-foreground)]"),
+          "text-xs font-bold tabular-nums text-[var(--foreground)]",
           formatMonthDayCell(cur, isFirstOrStart)
         );
         top.appendChild(dateLabel);
         if (primeCount > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-amber-500"));
+          top.appendChild(el("span", "w-2 h-2 rounded-full bg-amber-500"));
         }} else if (count > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-emerald-600"));
+          top.appendChild(el("span", "w-2 h-2 rounded-full bg-emerald-600"));
         }}
         cell.appendChild(top);
 
         const bottom = el("div", "space-y-0.5 mt-1 tabular-nums");
         if (count === 0) {{
-          bottom.appendChild(el("div", "text-[10px] text-[var(--muted-foreground)]", dict.zeroMatch));
+          bottom.appendChild(el("div", "text-[10px] font-medium text-[var(--muted-foreground)]", dict.zeroMatch));
         }} else {{
-          bottom.appendChild(el("div", "text-[11px] font-medium text-[var(--foreground)]", formatSlotsCountLabel(count)));
+          bottom.appendChild(el("div", "text-[11px] font-semibold text-[var(--foreground)]", formatSlotsCountLabel(count)));
           if (primeCount > 0) {{
-            bottom.appendChild(el("div", "text-[10px] font-medium text-amber-700 dark:text-amber-400", formatPrimeCountLabel(primeCount)));
+            bottom.appendChild(el("div", "text-[10px] font-bold text-amber-800 dark:text-amber-300", formatPrimeCountLabel(primeCount)));
           }}
         }}
         cell.appendChild(bottom);
@@ -1270,28 +1274,31 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       badgeEl.textContent = formatSlotsCountLabel(dayObj.filteredSlots.length);
 
       if (dayObj.filteredSlots.length === 0) {{
-        listEl.appendChild(el("p", "text-xs text-[var(--muted-foreground)] py-8 text-center", dict.noSlotMatch));
+        listEl.appendChild(el("p", "text-xs font-medium text-[var(--muted-foreground)] py-8 text-center", dict.noSlotMatch));
         return;
       }}
 
       dayObj.filteredSlots.forEach(slot => {{
-        const row = el("div", "py-3 first:pt-1 last:pb-1 space-y-2");
+        const boxClasses = slot.isPrimeDateSlot
+          ? "p-3 rounded-md border-[1.6px] border-amber-600/75 bg-amber-500/[0.08] space-y-2.5"
+          : "p-3 rounded-md border-[1.6px] border-[var(--border)] bg-[var(--background)]/80 space-y-2.5";
+        const row = el("div", boxClasses);
 
         const header = el("div", "flex items-center justify-between gap-2");
         const timeWrap = el("div", "flex items-center gap-2 flex-wrap");
-        timeWrap.appendChild(el("span", "text-sm font-semibold tabular-nums text-[var(--foreground)]", slot.timeFormatted + " – " + slot.endTimeFormatted));
+        timeWrap.appendChild(el("span", "text-sm font-bold tabular-nums text-[var(--foreground)]", slot.timeFormatted + " – " + slot.endTimeFormatted));
         if (slot.isPrimeDateSlot) {{
-          timeWrap.appendChild(el("span", "px-1.5 py-0.5 text-[10px] font-medium rounded bg-amber-500/15 text-amber-800 dark:text-amber-300", dict.primeTimeBadge));
+          timeWrap.appendChild(el("span", "px-2 py-0.5 text-[10px] font-semibold rounded border border-amber-600/40 bg-amber-500/20 text-amber-900 dark:text-amber-200", dict.primeTimeBadge));
         }}
         header.appendChild(timeWrap);
-        header.appendChild(el("span", "text-xs text-[var(--muted-foreground)] tabular-nums", formatCourtsOpenLabel(slot.courtsCount)));
+        header.appendChild(el("span", "text-xs font-semibold text-[var(--muted-foreground)] tabular-nums", formatCourtsOpenLabel(slot.courtsCount)));
         row.appendChild(header);
 
         const courtsWrap = el("div", "flex flex-wrap gap-1.5");
         slot.courts.forEach(c => {{
           const cBtn = el(
             "a",
-            "px-2.5 py-1 rounded text-xs font-medium border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
+            "px-2.5 py-1 rounded text-xs font-semibold border-[1.5px] border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
             formatBookCourtButton(c.courtName)
           );
           cBtn.setAttribute("href", c.bookingUrl);
