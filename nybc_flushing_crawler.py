@@ -377,25 +377,24 @@ def to_compact_payload(data: dict[str, Any]) -> dict[str, Any]:
   return compact
 
 
-def format_ny_timestamp(iso_str: str) -> str:
-  try:
-    dt = datetime.datetime.fromisoformat(iso_str.replace("Z", "+00:00"))
-    ny_dt = dt.astimezone(ZoneInfo(TIMEZONE))
-    return ny_dt.strftime("%Y-%m-%d %H:%M EST (New York Time)")
-  except ValueError:
-    return f"{iso_str[:16].replace('T', ' ')} EST"
-
-
 def generate_markdown_calendar(data: dict[str, Any]) -> str:
-  ny_updated = format_ny_timestamp(data["crawledAt"])
+  try:
+    dt_utc = datetime.datetime.fromisoformat(
+        data["crawledAt"].replace("Z", "+00:00")
+    )
+    est_str = dt_utc.astimezone(ZoneInfo("America/New_York")).strftime(
+        "%Y-%m-%d %H:%M EST"
+    )
+  except Exception:
+    est_str = f"{data['crawledAt'][:16].replace('T', ' ')} EST"
   lines = [
       "# NYBC 法拉盛羽毛球馆空场日历 / Flushing Badminton Availability Calendar",
       "",
       f"- **地址 / Location**: `{data['location']}`",
       f"- **预约类别 / Category**: `{data['category']}`",
       f"- **官方预约链接 / Booking Page**: [NYBC Flushing Reservation]({data['scheduleUrl']})",
-      f"- **黄金时段定义 / Prime Time**: `周五、周六、周日 16:00 (开始) – 21:00 (结束) / Fri, Sat & Sun 4:00 PM (start) – 9:00 PM (end)`",
-      f"- **更新时间 / Last Crawled**: `{ny_updated}`",
+      f"- **优先时段定义 / Prime Time**: `周五、周六、周日 16:00 (开始) – 21:00 (结束) / Fri, Sat & Sun 4:00 PM (start) – 9:00 PM (end)`",
+      f"- **更新时间 / Last Crawled**: `{est_str}`",
       "",
   ]
   p2 = data["availabilityByPlayers"].get("2")
@@ -403,7 +402,7 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
     lines.extend([
         f"## 2人预约 / 2 Players (`{p2['name']}` — {p2['durationMinutes']} min, \\${p2['priceUsd']})",
         "",
-        "| 日期 / Date | 星期 / Day | 黄金时段 (周五至周日 16:00–21:00) / Prime Slots | 全部可订时段及场地 / All Available Start Times |",
+        "| 日期 / Date | 星期 / Day | 优先时段 (周五至周日 16:00–21:00) / Prime Slots | 全部可订时段及场地 / All Available Start Times |",
         "| :--- | :--- | :--- | :--- |",
     ])
     for day in p2["days"]:
@@ -426,7 +425,7 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
 
 
 def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -> str:
-  """Generates a clean, mobile-friendly (iPhone 17 Pro optimized) editorial HTML calendar."""
+  """Generates a clean, editorial HTML calendar (White theme default + ZH/EN i18n)."""
   compact_json = json.dumps(
       to_compact_payload(data), separators=(",", ":")
   ).replace("</", "<\\/")
@@ -441,36 +440,26 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       else """
   <style>
     :root {
-      --background: #f1f5f9;
-      --foreground: #0f172a;
+      --background: #fafaf9;
+      --foreground: #111827;
       --card: #ffffff;
-      --border: #94a3b8;
-      --muted-foreground: #475569;
+      --border: #e5e7eb;
+      --muted-foreground: #6b7280;
       --primary: #1b4332;
       --primary-foreground: #ffffff;
-      --secondary: #e2e8f0;
-      --secondary-foreground: #0f172a;
+      --secondary: #f3f4f6;
+      --secondary-foreground: #1f2937;
     }
     html.dark {
-      --background: #090b0d;
-      --foreground: #f8fafc;
-      --card: #121519;
-      --border: #3f4756;
-      --muted-foreground: #94a3b8;
+      --background: #0c0d0e;
+      --foreground: #f3f4f6;
+      --card: #141618;
+      --border: #26292e;
+      --muted-foreground: #9ca3af;
       --primary: #2d6a4f;
       --primary-foreground: #ffffff;
-      --secondary: #1e232a;
-      --secondary-foreground: #f1f5f9;
-    }
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      --secondary: #1f2226;
+      --secondary-foreground: #e5e7eb;
     }
   </style>"""
   )
@@ -478,131 +467,110 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NYBC 法拉盛羽毛球馆 · 空场预约日历 | Court Availability</title>
   <script src="{tailwind_src}"></script>{style_block}
 </head>
-<body class="bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors pb-[env(safe-area-inset-bottom,1rem)]">
-  <div class="max-w-6xl mx-auto px-2.5 sm:px-6 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-6">
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 space-y-6">
     <!-- Top Masthead -->
-    <header class="border-b-[1.8px] border-[var(--border)] pb-4 sm:pb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 sm:gap-4">
-      <div class="space-y-1">
-        <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-xs text-[var(--muted-foreground)] tracking-wide">
-          <span id="header-category" class="font-semibold text-[var(--foreground)]"></span>
+    <header class="border-b border-[var(--border)] pb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs text-[var(--muted-foreground)] tracking-wide">
+          <span id="header-category" class="font-medium text-[var(--foreground)]"></span>
           <span>·</span>
-          <span id="header-location" class="font-medium"></span>
+          <span id="header-location"></span>
         </div>
-        <h1 id="page-title" class="text-lg sm:text-2xl font-bold tracking-tight text-[var(--foreground)]"></h1>
-        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] sm:text-xs text-[var(--muted-foreground)] tabular-nums">
-          <span id="subtitle-meta" class="font-medium"></span>
-          <span id="refresh-status" class="text-emerald-700 dark:text-emerald-400 font-semibold hidden"></span>
+        <h1 id="page-title" class="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--foreground)]"></h1>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--muted-foreground)] tabular-nums">
+          <span id="subtitle-meta"></span>
+          <span id="refresh-status" class="text-emerald-700 dark:text-emerald-400 font-medium hidden"></span>
           <a id="actions-trigger-link" href="https://github.com/Harrypotterrrr/happy-badminton/actions/workflows/update_calendar.yml" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--foreground)] transition hidden"></a>
         </div>
       </div>
 
-      <div class="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 sm:gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <a id="homepage-link" href="https://harrypotterrrr.github.io" target="_blank" rel="noopener noreferrer"
-           class="px-2.5 sm:px-3 py-1.5 min-h-[36px] rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition inline-flex items-center justify-center text-center touch-manipulation">
+           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition">
         </a>
         <button id="refresh-btn" type="button"
-           class="px-2.5 sm:px-3 py-1.5 min-h-[36px] rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center justify-center gap-1.5 touch-manipulation">
+           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center gap-1.5">
           <span id="refresh-btn-text"></span>
         </button>
-        <div class="grid grid-cols-2 gap-1.5 sm:contents">
-          <button id="lang-toggle" type="button"
-             class="px-2 sm:px-3 py-1.5 min-h-[36px] rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center justify-center touch-manipulation">
-          </button>
-          <button id="theme-toggle" type="button"
-             class="px-2 sm:px-3 py-1.5 min-h-[36px] rounded-md text-xs font-semibold bg-[var(--card)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer inline-flex items-center justify-center touch-manipulation">
-          </button>
-        </div>
+        <button id="lang-toggle" type="button"
+           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
+        </button>
+        <button id="theme-toggle" type="button"
+           class="px-3 py-1.5 rounded-md text-xs font-medium bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--secondary)] transition cursor-pointer">
+        </button>
         <a id="main-schedule-link" target="_blank" rel="noopener noreferrer"
-           class="col-span-3 sm:col-span-1 px-3.5 py-1.5 min-h-[36px] rounded-md text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] border-[1.5px] border-[var(--primary)] hover:opacity-90 transition inline-flex items-center justify-center text-center touch-manipulation">
+           class="px-3.5 py-1.5 rounded-md text-xs font-medium bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
         </a>
       </div>
     </header>
 
-    <!-- Compact Filter Toolbar (2x2 touch grids on iPhone 17 Pro, inline pills on desktop) -->
-    <section class="bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-3 sm:p-3.5 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-3.5">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
-        <span id="label-step-1" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></span>
-        <div id="player-tabs" class="grid grid-cols-3 sm:inline-flex sm:flex-wrap gap-1.5"></div>
+    <!-- Compact Filter Toolbar -->
+    <section class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+        <span id="label-step-1" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></span>
+        <div id="player-tabs" class="inline-flex flex-wrap gap-1"></div>
       </div>
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
-        <span id="label-step-2" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></span>
-        <div id="time-filter-tabs" class="grid grid-cols-2 sm:inline-flex sm:flex-wrap gap-1.5"></div>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+        <span id="label-step-2" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></span>
+        <div id="time-filter-tabs" class="inline-flex flex-wrap gap-1"></div>
       </div>
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
-        <label id="label-step-3" for="court-select" class="text-xs font-semibold text-[var(--muted-foreground)] shrink-0"></label>
-        <select id="court-select" class="w-full sm:w-auto min-h-[36px] px-2.5 py-1.5 rounded-md text-xs font-medium bg-[var(--background)] text-[var(--foreground)] border-[1.5px] border-[var(--border)] focus:outline-none">
+      <div class="flex items-center gap-2">
+        <label id="label-step-3" for="court-select" class="text-xs font-medium text-[var(--muted-foreground)] shrink-0"></label>
+        <select id="court-select" class="px-2.5 py-1.5 rounded-md text-xs bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] focus:outline-none">
         </select>
       </div>
     </section>
 
     <!-- Main Schedule Workspace: Calendar Matrix + Selected Day Sheet -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-start">
-      <!-- Left: 5-Week Calendar Grid (with Mobile Grid/Cards Toggle & Zero-Wrap Cells) -->
-      <section class="lg:col-span-7 bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-2.5 sm:p-4 shadow-sm space-y-2.5 sm:space-y-3">
-        <div class="flex items-center justify-between flex-wrap gap-2 pb-2 sm:pb-2.5 border-b-[1.8px] border-[var(--border)]">
-          <div class="flex items-center gap-2">
-            <h2 id="calendar-heading" class="text-sm font-bold text-[var(--foreground)]"></h2>
-            <button id="cal-view-toggle" type="button"
-               class="sm:hidden px-2 py-0.5 rounded text-[11px] font-semibold border-[1.5px] border-[var(--border)] bg-[var(--secondary)] text-[var(--secondary-foreground)] cursor-pointer touch-manipulation">
-            </button>
-          </div>
-          <div class="flex items-center gap-3 text-[11px] sm:text-xs font-medium text-[var(--muted-foreground)]">
-            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500 inline-block"></span><span id="legend-prime"></span></span>
-            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-600 inline-block"></span><span id="legend-regular"></span></span>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <!-- Left: 5-Week Calendar Grid -->
+      <section class="lg:col-span-7 bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-[var(--border)]">
+          <h2 id="calendar-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
+          <div class="flex items-center gap-4 text-xs text-[var(--muted-foreground)]">
+            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span><span id="legend-prime"></span></span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span><span id="legend-regular"></span></span>
           </div>
         </div>
-        <div id="weekday-header" class="grid grid-cols-7 gap-1 sm:gap-1.5 text-center text-[11px] sm:text-xs font-semibold text-[var(--muted-foreground)] py-0.5">
+        <div id="weekday-header" class="grid grid-cols-7 gap-1 text-center text-[11px] font-medium text-[var(--muted-foreground)] py-1">
         </div>
-        <div id="calendar-grid" class="grid grid-cols-7 gap-1 sm:gap-1.5"></div>
-        <p id="mobile-cal-hint" class="lg:hidden text-[11px] font-medium text-[var(--muted-foreground)] text-center pt-0.5"></p>
+        <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
       </section>
 
       <!-- Right: Selected Day Time & Court Breakdown -->
-      <section id="selected-date-section" class="lg:col-span-5 bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-3 sm:p-4 shadow-sm space-y-3 scroll-mt-3">
-        <!-- Mobile Horizontal Quick-Swipe Date Strip (Easy thumb navigation on iPhone 17 Pro) -->
-        <div id="mobile-date-strip" class="lg:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 border-b border-[var(--border)]/60"></div>
-
-        <div class="border-b-[1.8px] border-[var(--border)] pb-2.5 sm:pb-3 flex items-center justify-between gap-2">
-          <div class="min-w-0">
-            <h2 id="selected-date-title" class="text-sm sm:text-base font-bold text-[var(--foreground)] truncate"></h2>
-            <p id="selected-date-subtitle" class="text-[11px] sm:text-xs font-medium text-[var(--muted-foreground)] mt-0.5 tabular-nums"></p>
+      <section id="selected-date-section" class="lg:col-span-5 bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3 scroll-mt-4">
+        <div class="border-b border-[var(--border)] pb-3 flex items-baseline justify-between gap-2">
+          <div>
+            <h2 id="selected-date-title" class="text-base font-semibold text-[var(--foreground)]"></h2>
+            <p id="selected-date-subtitle" class="text-xs text-[var(--muted-foreground)] mt-0.5 tabular-nums"></p>
           </div>
-          <div class="flex items-center gap-1.5 shrink-0">
-            <button id="prev-day-btn" type="button" aria-label="Previous day"
-               class="w-7 h-7 rounded border-[1.5px] border-[var(--border)] bg-[var(--secondary)] text-[var(--foreground)] hover:border-[var(--foreground)] text-xs font-bold inline-flex items-center justify-center cursor-pointer touch-manipulation">
-              ‹
-            </button>
-            <span id="selected-date-badge" class="px-2 py-0.5 text-xs font-semibold rounded border border-[var(--border)] bg-[var(--secondary)] text-[var(--secondary-foreground)] tabular-nums"></span>
-            <button id="next-day-btn" type="button" aria-label="Next day"
-               class="w-7 h-7 rounded border-[1.5px] border-[var(--border)] bg-[var(--secondary)] text-[var(--foreground)] hover:border-[var(--foreground)] text-xs font-bold inline-flex items-center justify-center cursor-pointer touch-manipulation">
-              ›
-            </button>
-          </div>
+          <span id="selected-date-badge" class="px-2 py-0.5 text-xs font-medium rounded bg-[var(--secondary)] text-[var(--secondary-foreground)] tabular-nums shrink-0"></span>
         </div>
-        <div id="slots-list" class="space-y-2.5 max-h-none lg:max-h-[540px] lg:overflow-y-auto lg:pr-1"></div>
+        <div id="slots-list" class="divide-y divide-[var(--border)] max-h-[540px] overflow-y-auto pr-1"></div>
       </section>
     </div>
 
     <!-- Prime Slots Directory (Strictly Fri/Sat/Sun 4:00 PM – 9:00 PM, positioned under Calendar) -->
-    <section class="bg-[var(--card)] border-[1.8px] border-[var(--border)] rounded-lg p-3 sm:p-4 shadow-sm space-y-3">
-      <div class="flex items-baseline justify-between flex-wrap gap-2 border-b-[1.8px] border-[var(--border)] pb-2.5">
+    <section class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
+      <div class="flex items-baseline justify-between flex-wrap gap-2 border-b border-[var(--border)] pb-2.5">
         <div>
-          <h2 id="prime-heading" class="text-sm font-bold text-[var(--foreground)]"></h2>
-          <p id="prime-desc" class="text-[11px] sm:text-xs font-medium text-[var(--muted-foreground)] mt-0.5"></p>
+          <h2 id="prime-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
+          <p id="prime-desc" class="text-xs text-[var(--muted-foreground)] mt-0.5"></p>
         </div>
-        <span id="prime-summary-badge" class="text-xs font-semibold text-[var(--muted-foreground)] tabular-nums"></span>
+        <span id="prime-summary-badge" class="text-xs font-medium text-[var(--muted-foreground)] tabular-nums"></span>
       </div>
-      <div id="prime-picks-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3"></div>
+      <div id="prime-picks-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
     </section>
 
     <!-- Footer -->
-    <footer class="pt-3 border-t-[1.8px] border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] sm:text-xs font-medium text-[var(--muted-foreground)] text-center sm:text-left">
+    <footer class="pt-2 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--muted-foreground)]">
       <span id="footer-note"></span>
       <div class="flex items-center gap-4">
         <a id="footer-homepage" href="https://harrypotterrrr.github.io" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--foreground)] underline transition"></a>
@@ -620,27 +588,27 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     ];
 
     const LIGHT_VARS = {{
-      "--background": "#f1f5f9",
-      "--foreground": "#0f172a",
+      "--background": "#fafaf9",
+      "--foreground": "#111827",
       "--card": "#ffffff",
-      "--border": "#94a3b8",
-      "--muted-foreground": "#475569",
+      "--border": "#e5e7eb",
+      "--muted-foreground": "#6b7280",
       "--primary": "#1b4332",
       "--primary-foreground": "#ffffff",
-      "--secondary": "#e2e8f0",
-      "--secondary-foreground": "#0f172a"
+      "--secondary": "#f3f4f6",
+      "--secondary-foreground": "#1f2937"
     }};
 
     const DARK_VARS = {{
-      "--background": "#090b0d",
-      "--foreground": "#f8fafc",
-      "--card": "#121519",
-      "--border": "#3f4756",
-      "--muted-foreground": "#94a3b8",
+      "--background": "#0c0d0e",
+      "--foreground": "#f3f4f6",
+      "--card": "#141618",
+      "--border": "#26292e",
+      "--muted-foreground": "#9ca3af",
       "--primary": "#2d6a4f",
       "--primary-foreground": "#ffffff",
-      "--secondary": "#1e232a",
-      "--secondary-foreground": "#f1f5f9"
+      "--secondary": "#1f2226",
+      "--secondary-foreground": "#e5e7eb"
     }};
 
     const I18N = {{
@@ -662,30 +630,26 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         step1Label: "人数 / 时长",
         step2Label: "时段筛选",
         step3Label: "场地",
-        courtFilterAll: "全部 7 片场地 (1–5号标准 / 6号VIP / 7号训练)",
+        courtFilterAll: "全部 7 个场地 (1–5号标准 / 6号VIP / 7号训练)",
         courtFilterStandard: "标准场地 (1–5号)",
         courtFilterVip: "6号场地 (VIP)",
         courtFilterTraining: "7号场地 (训练场)",
-        primeHeading: "周末及周五黄金时段空场汇总 (周五、周六、周日 16:00–21:00)",
+        primeHeading: "周末及周五优先时段空场汇总 (周五、周六、周日 16:00–21:00)",
         primeDesc: "仅筛选周五、周六、周日 16:00 (开始) 至 21:00 (结束) 的空场。点击日期卡片在上方查看，或点击时间直接跳转 NYBC 对应场地预约。",
         calendarHeading: "未来 5 周空场日历",
-        calViewCards: "切换卡片视图",
-        calViewGrid: "切换日历网格",
-        mobileCalHint: "点击日期即可查看下方详细空场时段 ↓",
-        legendPrime: "黄金时段 (周五–日 16–21点)",
-        legendRegular: "常规可订",
+        legendPrime: "优先时段 (周五–周日 16–21点)",
+        legendRegular: "常规可订时段",
         weekdays: ["一", "二", "三", "四", "五", "六", "日"],
         filterAll: "全部时段",
-        filterPrime: "黄金时段 (周五–日 16–21点)",
+        filterPrime: "优先时段 (周五–日 16–21点)",
         filterWindow4to9: "16:00–21:00 (全部日期)",
         filterWeekend: "仅看周五/六/日",
         fridayTag: "周五",
         weekendTag: "周末",
         noPrimeMatch: "当前筛选条件下暂无周五、周六、周日 16:00–21:00 的空场，可尝试切换人数或场地类型。",
         noSlotMatch: "当天没有符合筛选条件的空场时段。",
-        primeTimeBadge: "黄金时段",
+        primeTimeBadge: "优先时段",
         zeroMatch: "无空场",
-        zeroMatchShort: "无",
         closedLabel: "—",
         footerNote: "每 2 小时由 GitHub Actions 自动同步 NYBC 法拉盛球馆空场数据 · 所有预约链接均直达按人数预约 (NYBC)",
         courtNames: {{
@@ -721,16 +685,13 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         courtFilterVip: "Court 6 (VIP)",
         courtFilterTraining: "Court 07 (Training)",
         primeHeading: "Upcoming Prime Slots (Fri, Sat & Sun · 4:00 PM – 9:00 PM)",
-        primeDesc: "Strictly Friday, Saturday & Sunday slots starting >= 4:00 PM and ending <= 9:00 PM. Tap a date to inspect above, or tap a time chip to book that court directly.",
+        primeDesc: "Strictly Friday, Saturday & Sunday slots starting >= 4:00 PM and ending <= 9:00 PM. Click a date to inspect above, or click a time chip to book that court directly.",
         calendarHeading: "5-Week Availability",
-        calViewCards: "Card View",
-        calViewGrid: "7-Day Grid",
-        mobileCalHint: "Tap any date to view available courts below ↓",
-        legendPrime: "Prime (Fri–Sun 4–9p)",
-        legendRegular: "Open",
+        legendPrime: "Prime (Fri–Sun 4–9 PM)",
+        legendRegular: "Open Slots",
         weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         filterAll: "All Times",
-        filterPrime: "Prime (Fri–Sun 4–9p)",
+        filterPrime: "Prime (Fri–Sun 4–9 PM)",
         filterWindow4to9: "4–9 PM (All Days)",
         filterWeekend: "Fri / Sat / Sun",
         fridayTag: "Fri",
@@ -739,7 +700,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         noSlotMatch: "No open slots on this date match your current filter.",
         primeTimeBadge: "Prime",
         zeroMatch: "0 open",
-        zeroMatchShort: "0",
         closedLabel: "—",
         footerNote: "Auto-updated every 2 hours via GitHub Actions · Direct links locked to Reservation by # of players (NYBC)",
         courtNames: {{}}
@@ -754,7 +714,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       timeFilter: "all",
       courtFilter: "all",
       selectedDate: null,
-      mobileCalCards: false,
       isRefreshing: false
     }};
 
@@ -776,32 +735,45 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       return node;
     }}
 
-    function formatUpdatedEst(isoStr) {{
-      if (!isoStr) return "";
-      const dt = new Date(isoStr);
-      if (isNaN(dt.getTime())) return isoStr;
-      const parts = new Intl.DateTimeFormat("en-CA", {{
-        timeZone: "America/New_York",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
-      }}).formatToParts(dt);
-      const map = {{}};
-      parts.forEach(p => {{ map[p.type] = p.value; }});
-      const hr = map.hour === "24" ? "00" : map.hour;
-      const suffix = state.lang === "zh" ? " EST (纽约时间)" : " EST (NY Time)";
-      return map.year + "-" + map.month + "-" + map.day + " " + hr + ":" + map.minute + suffix;
-    }}
-
     function formatCurrency(usdStr) {{
       const num = parseFloat(usdStr);
       return new Intl.NumberFormat(t().locale, {{
         style: "currency",
         currency: "USD"
       }}).format(num);
+    }}
+
+    function formatUpdatedEst(isoStr) {{
+      try {{
+        const dt = new Date(isoStr);
+        if (isNaN(dt.getTime())) return isoStr.slice(0, 16).replace("T", " ") + " EST";
+        const parts = new Intl.DateTimeFormat("en-CA", {{
+          timeZone: "America/New_York",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        }}).formatToParts(dt);
+        const get = type => (parts.find(p => p.type === type) || {{ value: "" }}).value;
+        const hh = get("hour") === "24" ? "00" : get("hour");
+        return get("year") + "-" + get("month") + "-" + get("day") + " " + hh + ":" + get("minute") + " EST";
+      }} catch (_e) {{
+        return isoStr.slice(0, 16).replace("T", " ") + " EST";
+      }}
+    }}
+
+    function isMobileView() {{
+      return window.innerWidth < 1024 || /iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent);
+    }}
+
+    function scrollToSelectedDateOnMobile() {{
+      if (!isMobileView()) return;
+      const sec = document.getElementById("selected-date-section");
+      if (sec) {{
+        sec.scrollIntoView({{ behavior: "smooth", block: "start" }});
+      }}
     }}
 
     function formatDateShort(isoDate) {{
@@ -825,9 +797,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       }}).format(dt);
     }}
 
-    function formatMonthDayCell(dt, isFirstOrStart, compactNumeric) {{
+    function formatMonthDayCell(dt, isFirstOrStart) {{
       const dayNum = dt.getUTCDate();
-      if (compactNumeric || state.lang === "zh") {{
+      if (state.lang === "zh") {{
         if (dayNum === 1 || isFirstOrStart) {{
           return (dt.getUTCMonth() + 1) + "/" + dayNum;
         }}
@@ -875,14 +847,14 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     function formatPrimeSummary(totalPrimeSlots, daysCount) {{
       if (state.lang === "zh") {{
-        return daysCount + " 个周五/六/日有空场 · 共 " + totalPrimeSlots + " 个黄金时段";
+        return daysCount + " 个周五/六/日有空场 · 共 " + totalPrimeSlots + " 个优先时段";
       }}
       return totalPrimeSlots + " prime slots across " + daysCount + " Fri/Sat/Sun dates";
     }}
 
     function formatCourtsCountBadge(count) {{
       if (state.lang === "zh") {{
-        return count + "片";
+        return count + "场";
       }}
       return count + "c";
     }}
@@ -894,27 +866,16 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       return count + (count === 1 ? " slot" : " slots");
     }}
 
-    function formatSlotsCountCompact(count) {{
-      if (state.lang === "zh") {{
-        return count + "场";
-      }}
-      return count + " open";
-    }}
-
     function formatPrimeCountLabel(count) {{
       if (state.lang === "zh") {{
-        return count + " 黄金";
+        return count + " 优先";
       }}
       return count + " prime";
     }}
 
-    function formatPrimeCountCompact(count) {{
-      return "★" + count;
-    }}
-
     function formatCourtsOpenLabel(count) {{
       if (state.lang === "zh") {{
-        return count + " 片可订";
+        return count + " 场可订";
       }}
       return count + (count === 1 ? " court" : " courts");
     }}
@@ -988,6 +949,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const statusEl = document.getElementById("refresh-status");
       const triggerEl = document.getElementById("actions-trigger-link");
 
+      let updated = false;
       for (const baseUrl of RAW_JSON_URLS) {{
         try {{
           const sep = baseUrl.includes("?") ? "&" : "?";
@@ -996,6 +958,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
           const rawJson = await resp.json();
           if (rawJson && rawJson.availabilityByPlayers) {{
             COMPACT_DATA = convertRawJsonToCompact(rawJson);
+            updated = true;
             break;
           }}
         }} catch (_err) {{
@@ -1077,17 +1040,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       }});
     }}
 
-    function selectDateAndRevealOnMobile(isoDate, shouldScroll) {{
-      state.selectedDate = isoDate;
-      renderAll();
-      if (shouldScroll && window.innerWidth < 1024) {{
-        const target = document.getElementById("selected-date-section");
-        if (target) {{
-          target.scrollIntoView({{ behavior: "smooth", block: "nearest" }});
-        }}
-      }}
-    }}
-
     function renderStaticText() {{
       const dict = t();
       document.documentElement.lang = dict.locale;
@@ -1141,8 +1093,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       document.getElementById("prime-heading").textContent = dict.primeHeading;
       document.getElementById("prime-desc").textContent = dict.primeDesc;
       document.getElementById("calendar-heading").textContent = dict.calendarHeading;
-      document.getElementById("cal-view-toggle").textContent = state.mobileCalCards ? dict.calViewGrid : dict.calViewCards;
-      document.getElementById("mobile-cal-hint").textContent = dict.mobileCalHint;
       document.getElementById("legend-prime").textContent = dict.legendPrime;
       document.getElementById("legend-regular").textContent = dict.legendRegular;
 
@@ -1155,7 +1105,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const wkHeader = document.getElementById("weekday-header");
       wkHeader.replaceChildren();
       dict.weekdays.forEach((wName, idx) => {{
-        wkHeader.appendChild(el("div", idx >= 4 ? "text-[var(--foreground)] font-bold" : "font-semibold", wName));
+        wkHeader.appendChild(el("div", idx >= 4 ? "text-[var(--foreground)] font-semibold" : "", wName));
       }});
     }}
 
@@ -1168,8 +1118,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const btn = el(
           "button",
           active
-            ? "px-2 sm:px-2.5 py-1.5 sm:py-1 min-h-[36px] sm:min-h-0 rounded text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] border-[1.5px] border-[var(--primary)] transition cursor-pointer tabular-nums text-center touch-manipulation"
-            : "px-2 sm:px-2.5 py-1.5 sm:py-1 min-h-[36px] sm:min-h-0 rounded text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] border-[1.5px] border-[var(--border)] hover:opacity-85 transition cursor-pointer tabular-nums text-center touch-manipulation",
+            ? "px-2.5 py-1 rounded text-xs font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition cursor-pointer tabular-nums"
+            : "px-2.5 py-1 rounded text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-80 transition cursor-pointer tabular-nums",
           formatPlayerButtonLabel(pKey, plan)
         );
         btn.addEventListener("click", () => {{
@@ -1193,8 +1143,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const btn = el(
           "button",
           active
-            ? "px-2 sm:px-2.5 py-1.5 sm:py-1 min-h-[36px] sm:min-h-0 rounded text-xs font-semibold bg-[var(--foreground)] text-[var(--card)] border-[1.5px] border-[var(--foreground)] transition cursor-pointer text-center touch-manipulation"
-            : "px-2 sm:px-2.5 py-1.5 sm:py-1 min-h-[36px] sm:min-h-0 rounded text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] border-[1.5px] border-[var(--border)] hover:opacity-85 transition cursor-pointer text-center touch-manipulation",
+            ? "px-2.5 py-1 rounded text-xs font-medium bg-[var(--foreground)] text-[var(--background)] transition cursor-pointer"
+            : "px-2.5 py-1 rounded text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-80 transition cursor-pointer",
           opt.label
         );
         btn.addEventListener("click", () => {{
@@ -1225,29 +1175,31 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const isSelected = state.selectedDate === d.date;
         const card = el(
           "div",
-          "p-3 rounded-md border-[1.6px] " + (isSelected ? "border-[var(--primary)] bg-[var(--primary)]/10 shadow-sm" : "border-[var(--border)] bg-[var(--background)]/80 hover:border-[var(--foreground)]") + " transition cursor-pointer flex flex-col justify-between gap-2.5 touch-manipulation"
+          "p-3 rounded-md border " + (isSelected ? "border-[var(--foreground)] bg-[var(--secondary)]/40" : "border-[var(--border)] bg-[var(--background)]") + " hover:border-[var(--foreground)]/50 transition cursor-pointer flex flex-col justify-between gap-2.5"
         );
         card.addEventListener("click", () => {{
-          selectDateAndRevealOnMobile(d.date, true);
+          state.selectedDate = d.date;
+          renderAll();
+          scrollToSelectedDateOnMobile();
         }});
 
         const topRow = el("div", "flex items-center justify-between gap-1");
-        const title = el("span", "text-xs font-bold text-[var(--foreground)]", formatDateShort(d.date));
+        const title = el("span", "text-xs font-semibold text-[var(--foreground)]", formatDateShort(d.date));
         const tag = el(
           "span",
-          "px-1.5 py-0.5 text-[10px] font-semibold rounded border border-amber-600/40 bg-amber-500/20 text-amber-900 dark:text-amber-200",
+          "px-1.5 py-0.5 text-[10px] font-medium rounded bg-amber-500/15 text-amber-800 dark:text-amber-300",
           d.isWeekend ? dict.weekendTag : dict.fridayTag
         );
         topRow.appendChild(title);
         topRow.appendChild(tag);
         card.appendChild(topRow);
 
-        const chipsWrap = el("div", "flex flex-wrap gap-1.5");
+        const chipsWrap = el("div", "flex flex-wrap gap-1");
         const primeSlots = d.filteredSlots.filter(s => s.isPrimeDateSlot);
         primeSlots.forEach(s => {{
           const link = el(
             "a",
-            "px-2 py-1 sm:py-0.5 text-[11px] font-semibold tabular-nums rounded border-[1.5px] border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] shadow-[0_1px_1px_rgba(0,0,0,0.04)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition touch-manipulation",
+            "px-2 py-0.5 text-[11px] font-medium tabular-nums rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
             s.timeFormatted + "–" + s.endTimeFormatted + " (" + formatCourtsCountBadge(s.courtsCount) + ")"
           );
           link.setAttribute("href", s.courts[0].bookingUrl);
@@ -1263,58 +1215,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     function renderCalendarGrid(days) {{
       const grid = document.getElementById("calendar-grid");
-      const wkHeader = document.getElementById("weekday-header");
       grid.replaceChildren();
       if (days.length === 0) return;
       const dict = t();
-
-      // Mobile Card List mode (2 columns on iPhone 17 Pro when toggled)
-      if (state.mobileCalCards && window.innerWidth < 640) {{
-        wkHeader.classList.add("hidden");
-        grid.className = "grid grid-cols-2 gap-2";
-        days.forEach(dayData => {{
-          const iso = dayData.date;
-          const isSelected = state.selectedDate === iso;
-          const count = dayData.filteredSlots.length;
-          const primeCount = dayData.filteredPrimeCount;
-
-          let cardClasses = "p-2.5 rounded-md min-h-[60px] flex flex-col justify-between text-left transition cursor-pointer touch-manipulation ";
-          if (isSelected) {{
-            cardClasses += "border-[2px] border-[var(--primary)] bg-[var(--primary)]/12 shadow-sm";
-          }} else if (primeCount > 0) {{
-            cardClasses += "border-[1.6px] border-amber-600/70 bg-amber-500/[0.08]";
-          }} else if (count > 0) {{
-            cardClasses += "border-[1.6px] border-[var(--border)] bg-[var(--background)]/80";
-          }} else {{
-            cardClasses += "border-[1.5px] border-[var(--border)]/60 bg-[var(--background)]/40 opacity-65";
-          }}
-
-          const card = el("button", cardClasses);
-          card.type = "button";
-          card.addEventListener("click", () => selectDateAndRevealOnMobile(iso, true));
-
-          const top = el("div", "flex items-center justify-between gap-1 w-full");
-          top.appendChild(el("span", "text-xs font-bold text-[var(--foreground)]", formatDateShort(iso)));
-          if (primeCount > 0) {{
-            top.appendChild(el("span", "w-2 h-2 rounded-full bg-amber-500 shrink-0"));
-          }} else if (count > 0) {{
-            top.appendChild(el("span", "w-2 h-2 rounded-full bg-emerald-600 shrink-0"));
-          }}
-          card.appendChild(top);
-
-          const bottom = el("div", "flex items-center justify-between gap-1 mt-1.5 tabular-nums");
-          bottom.appendChild(el("span", "text-[11px] font-semibold text-[var(--foreground)]", count > 0 ? formatSlotsCountLabel(count) : dict.zeroMatch));
-          if (primeCount > 0) {{
-            bottom.appendChild(el("span", "px-1.5 py-0.5 rounded bg-amber-500/20 text-[10px] font-bold text-amber-900 dark:text-amber-300", formatPrimeCountLabel(primeCount)));
-          }}
-          card.appendChild(bottom);
-          grid.appendChild(card);
-        }});
-        return;
-      }}
-
-      wkHeader.classList.remove("hidden");
-      grid.className = "grid grid-cols-7 gap-1 sm:gap-1.5";
 
       const dayMap = {{}};
       days.forEach(d => {{ dayMap[d.date] = d; }});
@@ -1335,8 +1238,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const isFirstOrStart = iso === days[0].date;
 
         if (!dayData) {{
-          const emptyCell = el("div", "px-1 py-1.5 sm:p-2 rounded-md border-[1.5px] border-dashed border-[var(--border)]/50 bg-[var(--background)]/50 opacity-45 min-h-[60px] sm:min-h-[70px] flex flex-col justify-between");
-          emptyCell.appendChild(el("span", "text-[11px] sm:text-xs font-medium text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false, true)));
+          const emptyCell = el("div", "p-2 rounded border border-transparent opacity-35 min-h-[68px] flex flex-col justify-between");
+          emptyCell.appendChild(el("span", "text-xs text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false)));
           emptyCell.appendChild(el("span", "text-[10px] text-[var(--muted-foreground)]", dict.closedLabel));
           grid.appendChild(emptyCell);
           continue;
@@ -1346,95 +1249,47 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const count = dayData.filteredSlots.length;
         const primeCount = dayData.filteredPrimeCount;
 
-        let cellClasses = "px-1 py-1.5 sm:p-2 rounded-md min-h-[60px] sm:min-h-[70px] flex flex-col justify-between text-left transition cursor-pointer touch-manipulation overflow-hidden ";
+        let cellClasses = "p-2 rounded border min-h-[68px] flex flex-col justify-between text-left transition cursor-pointer ";
         if (isSelected) {{
-          cellClasses += "border-[2px] border-[var(--primary)] bg-[var(--primary)]/12 shadow-sm";
-        }} else if (primeCount > 0) {{
-          cellClasses += "border-[1.6px] border-amber-600/70 bg-amber-500/[0.08] hover:border-[var(--foreground)]";
-        }} else if (count > 0) {{
-          cellClasses += "border-[1.6px] border-[var(--border)] bg-[var(--background)]/80 hover:bg-[var(--secondary)]/70 hover:border-[var(--foreground)]";
+          cellClasses += "border-[var(--foreground)] bg-[var(--secondary)]/70";
         }} else {{
-          cellClasses += "border-[1.5px] border-[var(--border)]/70 bg-[var(--background)]/40 opacity-65 hover:border-[var(--foreground)]/50";
+          cellClasses += "border-[var(--border)] bg-[var(--background)] hover:border-[var(--foreground)]/40";
         }}
 
         const cell = el("button", cellClasses);
         cell.type = "button";
         cell.addEventListener("click", () => {{
-          selectDateAndRevealOnMobile(iso, true);
+          state.selectedDate = iso;
+          renderAll();
+          scrollToSelectedDateOnMobile();
         }});
 
-        const top = el("div", "flex items-center justify-between w-full gap-0.5");
-        // Compact numeric date on iPhone (sm:hidden) + full month-day on desktop (hidden sm:inline)
-        const mobileDateLabel = el("span", "sm:hidden text-[11px] font-bold tabular-nums text-[var(--foreground)] leading-none whitespace-nowrap", formatMonthDayCell(cur, isFirstOrStart, true));
-        const desktopDateLabel = el("span", "hidden sm:inline text-xs font-bold tabular-nums text-[var(--foreground)] leading-none whitespace-nowrap", formatMonthDayCell(cur, isFirstOrStart, false));
-        top.appendChild(mobileDateLabel);
-        top.appendChild(desktopDateLabel);
+        const top = el("div", "flex items-center justify-between w-full");
+        const dateLabel = el(
+          "span",
+          "text-xs tabular-nums " + (isSelected || dayData.isFriSatSun ? "font-semibold text-[var(--foreground)]" : "font-medium text-[var(--muted-foreground)]"),
+          formatMonthDayCell(cur, isFirstOrStart)
+        );
+        top.appendChild(dateLabel);
         if (primeCount > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500 shrink-0"));
+          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-amber-500"));
         }} else if (count > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-600 shrink-0"));
+          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-emerald-600"));
         }}
         cell.appendChild(top);
 
-        const bottom = el("div", "space-y-0.5 mt-1 tabular-nums w-full");
+        const bottom = el("div", "space-y-0.5 mt-1 tabular-nums");
         if (count === 0) {{
-          bottom.appendChild(el("div", "sm:hidden text-[10px] font-medium text-[var(--muted-foreground)] leading-tight whitespace-nowrap", dict.zeroMatchShort));
-          bottom.appendChild(el("div", "hidden sm:block text-[10px] font-medium text-[var(--muted-foreground)] leading-tight whitespace-nowrap", dict.zeroMatch));
+          bottom.appendChild(el("div", "text-[10px] text-[var(--muted-foreground)]", dict.zeroMatch));
         }} else {{
-          // Mobile compact non-wrapping count + Desktop full count
-          bottom.appendChild(el("div", "sm:hidden text-[10px] font-bold text-[var(--foreground)] leading-tight tracking-tighter whitespace-nowrap", formatSlotsCountCompact(count)));
-          bottom.appendChild(el("div", "hidden sm:block text-[11px] font-semibold text-[var(--foreground)] leading-tight whitespace-nowrap", formatSlotsCountLabel(count)));
+          bottom.appendChild(el("div", "text-[11px] font-medium text-[var(--foreground)]", formatSlotsCountLabel(count)));
           if (primeCount > 0) {{
-            bottom.appendChild(el("div", "sm:hidden inline-block px-1 py-0.2 rounded bg-amber-500/20 text-[9.5px] font-bold text-amber-900 dark:text-amber-300 leading-tight whitespace-nowrap", formatPrimeCountCompact(primeCount)));
-            bottom.appendChild(el("div", "hidden sm:block text-[10px] font-bold text-amber-800 dark:text-amber-300 leading-tight whitespace-nowrap", formatPrimeCountLabel(primeCount)));
+            bottom.appendChild(el("div", "text-[10px] font-medium text-amber-700 dark:text-amber-400", formatPrimeCountLabel(primeCount)));
           }}
         }}
         cell.appendChild(bottom);
         grid.appendChild(cell);
       }}
-    }}
-
-    function renderMobileDateStrip(days) {{
-      const strip = document.getElementById("mobile-date-strip");
-      if (!strip) return;
-      strip.replaceChildren();
-
-      days.forEach(d => {{
-        const isSelected = state.selectedDate === d.date;
-        const dt = new Date(d.date + "T12:00:00Z");
-        const mdNum = (dt.getUTCMonth() + 1) + "/" + dt.getUTCDate();
-        const wkShort = new Intl.DateTimeFormat(t().locale, {{ weekday: "short", timeZone: "UTC" }}).format(dt);
-        const count = d.filteredSlots.length;
-        const primeCount = d.filteredPrimeCount;
-
-        let pillClass = "shrink-0 px-2.5 py-1.5 rounded-md border-[1.5px] text-xs tabular-nums transition cursor-pointer touch-manipulation flex items-center gap-1.5 ";
-        if (isSelected) {{
-          pillClass += "border-[var(--primary)] bg-[var(--primary)] text-[var(--primary-foreground)] font-bold shadow-xs";
-        }} else if (primeCount > 0) {{
-          pillClass += "border-amber-600/70 bg-amber-500/[0.08] text-[var(--foreground)] font-semibold";
-        }} else {{
-          pillClass += "border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] font-medium";
-        }}
-
-        const pill = el("button", pillClass);
-        pill.type = "button";
-        pill.addEventListener("click", () => {{
-          state.selectedDate = d.date;
-          renderAll();
-        }});
-        pill.appendChild(el("span", "", wkShort + " " + mdNum));
-        if (primeCount > 0) {{
-          pill.appendChild(el("span", isSelected ? "text-[10px] px-1 rounded bg-white/20" : "text-[10px] px-1 rounded bg-amber-500/25 text-amber-900 dark:text-amber-200 font-bold", "★" + primeCount));
-        }} else {{
-          pill.appendChild(el("span", "text-[10px] opacity-75", "(" + count + ")"));
-        }}
-        strip.appendChild(pill);
-        if (isSelected) {{
-          setTimeout(() => {{
-            pill.scrollIntoView({{ behavior: "smooth", inline: "center", block: "nearest" }});
-          }}, 20);
-        }}
-      }});
     }}
 
     function renderSelectedDateDetail(days) {{
@@ -1446,32 +1301,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const dict = t();
 
       const plan = COMPACT_DATA.plans[state.players];
-      const dayIdx = days.findIndex(d => d.date === state.selectedDate);
-      const dayObj = dayIdx >= 0 ? days[dayIdx] : days[0];
+      const dayObj = days.find(d => d.date === state.selectedDate) || days[0];
       if (!dayObj) return;
       state.selectedDate = dayObj.date;
-
-      const prevBtn = document.getElementById("prev-day-btn");
-      const nextBtn = document.getElementById("next-day-btn");
-      if (prevBtn && nextBtn) {{
-        const curIdx = days.findIndex(d => d.date === state.selectedDate);
-        prevBtn.disabled = curIdx <= 0;
-        nextBtn.disabled = curIdx < 0 || curIdx >= days.length - 1;
-        prevBtn.classList.toggle("opacity-40", prevBtn.disabled);
-        nextBtn.classList.toggle("opacity-40", nextBtn.disabled);
-        prevBtn.onclick = () => {{
-          if (curIdx > 0) {{
-            state.selectedDate = days[curIdx - 1].date;
-            renderAll();
-          }}
-        }};
-        nextBtn.onclick = () => {{
-          if (curIdx >= 0 && curIdx < days.length - 1) {{
-            state.selectedDate = days[curIdx + 1].date;
-            renderAll();
-          }}
-        }};
-      }}
 
       const priceFmt = formatCurrency(plan.price);
       titleEl.textContent = formatDateFull(dayObj.date);
@@ -1483,31 +1315,28 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       badgeEl.textContent = formatSlotsCountLabel(dayObj.filteredSlots.length);
 
       if (dayObj.filteredSlots.length === 0) {{
-        listEl.appendChild(el("p", "text-xs font-medium text-[var(--muted-foreground)] py-8 text-center", dict.noSlotMatch));
+        listEl.appendChild(el("p", "text-xs text-[var(--muted-foreground)] py-8 text-center", dict.noSlotMatch));
         return;
       }}
 
       dayObj.filteredSlots.forEach(slot => {{
-        const boxClasses = slot.isPrimeDateSlot
-          ? "p-3 rounded-md border-[1.6px] border-amber-600/75 bg-amber-500/[0.08] space-y-2.5"
-          : "p-3 rounded-md border-[1.6px] border-[var(--border)] bg-[var(--background)]/80 space-y-2.5";
-        const row = el("div", boxClasses);
+        const row = el("div", "py-3 first:pt-1 last:pb-1 space-y-2");
 
-        const header = el("div", "flex items-center justify-between gap-2 pb-1.5 border-b border-[var(--border)]/60");
+        const header = el("div", "flex items-center justify-between gap-2");
         const timeWrap = el("div", "flex items-center gap-2 flex-wrap");
-        timeWrap.appendChild(el("span", "text-sm font-bold tabular-nums text-[var(--foreground)]", slot.timeFormatted + " – " + slot.endTimeFormatted));
+        timeWrap.appendChild(el("span", "text-sm font-semibold tabular-nums text-[var(--foreground)]", slot.timeFormatted + " – " + slot.endTimeFormatted));
         if (slot.isPrimeDateSlot) {{
-          timeWrap.appendChild(el("span", "px-2 py-0.5 text-[10px] font-semibold rounded border border-amber-600/40 bg-amber-500/20 text-amber-900 dark:text-amber-200", dict.primeTimeBadge));
+          timeWrap.appendChild(el("span", "px-1.5 py-0.5 text-[10px] font-medium rounded bg-amber-500/15 text-amber-800 dark:text-amber-300", dict.primeTimeBadge));
         }}
         header.appendChild(timeWrap);
-        header.appendChild(el("span", "text-xs font-semibold text-[var(--muted-foreground)] tabular-nums", formatCourtsOpenLabel(slot.courtsCount)));
+        header.appendChild(el("span", "text-xs text-[var(--muted-foreground)] tabular-nums", formatCourtsOpenLabel(slot.courtsCount)));
         row.appendChild(header);
 
-        const courtsWrap = el("div", "grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 pt-0.5");
+        const courtsWrap = el("div", "flex flex-wrap gap-1.5");
         slot.courts.forEach(c => {{
           const cBtn = el(
             "a",
-            "px-2.5 py-1.5 sm:py-1 min-h-[36px] sm:min-h-0 rounded text-xs font-semibold border-[1.5px] border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition inline-flex items-center justify-center text-center touch-manipulation",
+            "px-2.5 py-1 rounded text-xs font-medium border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] transition",
             formatBookCourtButton(c.courtName)
           );
           cBtn.setAttribute("href", c.bookingUrl);
@@ -1530,18 +1359,12 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         state.selectedDate = firstPrime ? firstPrime.date : days[0].date;
       }}
       renderCalendarGrid(days);
-      renderMobileDateStrip(days);
       renderSelectedDateDetail(days);
       renderPrimePicks(days);
     }}
 
     document.getElementById("court-select").addEventListener("change", e => {{
       state.courtFilter = e.target.value;
-      renderAll();
-    }});
-
-    document.getElementById("cal-view-toggle").addEventListener("click", () => {{
-      state.mobileCalCards = !state.mobileCalCards;
       renderAll();
     }});
 
