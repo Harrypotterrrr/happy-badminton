@@ -258,13 +258,17 @@ def crawl_all(player_counts: list[int], max_days: int) -> dict[str, Any]:
         courts_avail = slot_map[hhmm]
         hour_int = int(hhmm[:2])
         min_int = int(hhmm[3:5])
-        end_minutes = hour_int * 60 + min_int + int(appt["duration"])
+        start_minutes = hour_int * 60 + min_int
+        end_minutes = start_minutes + int(appt["duration"])
         end_hhmm = f"{(end_minutes // 60) % 24:02d}:{end_minutes % 60:02d}"
         label_12h = format_12h(hhmm)
         end_label_12h = format_12h(end_hhmm)
         is_weekend = dt_obj.weekday() >= 5
+        is_fri_sat_sun = dt_obj.weekday() in (4, 5, 6)
         is_prime_date_time = (
-            (10 <= hour_int <= 21) if is_weekend else (17 <= hour_int <= 21)
+            is_fri_sat_sun
+            and start_minutes >= 16 * 60
+            and end_minutes <= 21 * 60
         )
         slots_sorted.append({
             "time24": hhmm,
@@ -377,6 +381,7 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
       f"- **地址 / Location**: `{data['location']}`",
       f"- **预约类别 / Category**: `{data['category']}`",
       f"- **官方预约链接 / Booking Page**: [NYBC Flushing Reservation]({data['scheduleUrl']})",
+      f"- **黄金时段定义 / Prime Time**: `周五、周六、周日 16:00 (开始) – 21:00 (结束) / Fri, Sat & Sun 4:00 PM (start) – 9:00 PM (end)`",
       f"- **更新时间 / Last Crawled**: `{data['crawledAt'][:19].replace('T', ' ')} UTC`",
       "",
   ]
@@ -385,7 +390,7 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
     lines.extend([
         f"## 👥 2人预约 / 2 Players (`{p2['name']}` — {p2['durationMinutes']} min, \\${p2['priceUsd']})",
         "",
-        "| 日期 / Date | 星期 / Day | 黄金时段 / Prime Slots | 全部可订时段及场地 / All Available Start Times |",
+        "| 日期 / Date | 星期 / Day | 黄金时段 (周五至周日 16:00–21:00) / Prime Slots | 全部可订时段及场地 / All Available Start Times |",
         "| :--- | :--- | :--- | :--- |",
     ])
     for day in p2["days"]:
@@ -396,10 +401,10 @@ def generate_markdown_calendar(data: dict[str, Any]) -> str:
         entry = f"[**{s['time12']}**]({s['courts'][0]['bookingUrl']}) ({court_names})"
         all_badges.append(entry)
         if s["isPrimeDateSlot"]:
-          prime_badges.append(f"**{s['time12']}** ({s['courtsCount']} ct)")
+          prime_badges.append(f"**{s['time12']}–{s['endTime12']}** ({s['courtsCount']} ct)")
       prime_str = ", ".join(prime_badges) if prime_badges else "—"
       all_str = " • ".join(all_badges) if all_badges else "None"
-      wknd_marker = " 🌟" if day["isWeekend"] else ""
+      wknd_marker = " 🌟" if day["shortDay"] in ("Fri", "Sat", "Sun") else ""
       lines.append(
           f"| **{day['monthDay']}** (`{day['date']}`) | {day['shortDay']}{wknd_marker} | {prime_str} | {all_str} |"
       )
@@ -495,18 +500,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       </div>
     </div>
 
-    <!-- Top Prime Picks -->
-    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow-sm space-y-3">
-      <div class="flex items-center justify-between flex-wrap gap-2">
-        <div>
-          <h2 id="prime-heading" class="text-base font-semibold text-[var(--foreground)]"></h2>
-          <p id="prime-desc" class="text-xs text-[var(--muted-foreground)]"></p>
-        </div>
-        <span id="prime-summary-badge" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-[var(--secondary)] text-[var(--secondary-foreground)]"></span>
-      </div>
-      <div id="prime-picks-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
-    </div>
-
     <!-- Main Split View: Calendar Grid + Selected Date Detail -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
       <!-- Left: 34-Day Calendar Grid -->
@@ -535,10 +528,46 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         <div id="slots-list" class="space-y-2.5 max-h-[540px] overflow-y-auto pr-1"></div>
       </div>
     </div>
+
+    <!-- Prime Picks Section (Under Calendar Section) -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow-sm space-y-3">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h2 id="prime-heading" class="text-base font-semibold text-[var(--foreground)]"></h2>
+          <p id="prime-desc" class="text-xs text-[var(--muted-foreground)]"></p>
+        </div>
+        <span id="prime-summary-badge" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-[var(--secondary)] text-[var(--secondary-foreground)]"></span>
+      </div>
+      <div id="prime-picks-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
+    </div>
   </div>
 
   <script>
     const COMPACT_DATA = {compact_json};
+
+    const LIGHT_VARS = {{
+      "--background": "#f8fafc",
+      "--foreground": "#0f172a",
+      "--card": "#ffffff",
+      "--border": "#e2e8f0",
+      "--muted-foreground": "#64748b",
+      "--primary": "#db2777",
+      "--primary-foreground": "#ffffff",
+      "--secondary": "#f1f5f9",
+      "--secondary-foreground": "#1e293b"
+    }};
+
+    const DARK_VARS = {{
+      "--background": "#0b0f19",
+      "--foreground": "#f1f5f9",
+      "--card": "#111827",
+      "--border": "#1e293b",
+      "--muted-foreground": "#94a3b8",
+      "--primary": "#ec4899",
+      "--primary-foreground": "#ffffff",
+      "--secondary": "#1e293b",
+      "--secondary-foreground": "#e2e8f0"
+    }};
 
     const I18N = {{
       zh: {{
@@ -547,32 +576,32 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         badgeSchedule: "🏸 NYBC 法拉盛球馆实时空场",
         badgeLocation: "📍 132-70 34th Ave, Flushing NY 11354 (法拉盛)",
         pageTitle: "NYBC 法拉盛羽毛球馆 · 空场预约日历",
-        langToggleBtn: "🌐 English",
-        themeLight: "☀️ 浅色模式",
-        themeDark: "🌙 深色模式",
+        langToggleBtn: "🌐 Switch to English",
+        themeLight: "☀️ 浅色模式 (White)",
+        themeDark: "🌙 深色模式 (Dark)",
         openMainBtn: "打开 NYBC 官方预约页 ↗",
         step1Label: "1. 预约人数与时长 (按人数计费)",
-        step2Label: "2. 时间段筛选",
+        step2Label: "2. 时间段筛选 (黄金时段 = 周五/六/日 16:00–21:00)",
         step3Label: "3. 场地类型筛选",
         courtFilterAll: "全部 7 片法拉盛场地 (1–5号标准场、6号VIP、7号训练场)",
         courtFilterStandard: "仅看标准场地 (1–5号场地)",
         courtFilterVip: "仅看 6号场地 (VIP 场)",
         courtFilterTraining: "仅看 7号场地 (训练场)",
-        primeHeading: "✨ 推荐黄金时段 (工作日晚间 17:00–22:00 & 周末全天)",
-        primeDesc: "点击任意日期卡片可在下方查看当天详情，或直接点击粉色时间标签一键跳转到官方预订页面。",
+        primeHeading: "✨ 推荐黄金时段 (仅限周五、周六、周日 · 16:00 开始 – 21:00 结束)",
+        primeDesc: "仅展示周五、周六、周日 16:00 (开始) 至 21:00 (结束) 之间的黄金空场。点击卡片可在上方查看详情，或直接点击粉色时间标签一键预订。",
         calendarHeading: "📅 未来 5 周空场日历",
-        legendPrime: "黄金时段空场",
+        legendPrime: "黄金时段 (周五/六/日 16–21点)",
         legendRegular: "其他时段空场",
         weekdays: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
         filterAll: "全部时段",
-        filterPrime: "✨ 黄金时段",
-        filterEvening: "🌙 晚间 (17–22点)",
-        filterWeekend: "🌟 仅看周末",
-        weekendTag: "周末好时光",
-        weekdayEveTag: "工作日晚间",
-        noPrimeMatch: "当前筛选条件下暂无黄金时段空场，请尝试切换为“全部时段”或“全部场地”。",
+        filterPrime: "✨ 黄金时段 (周五/六/日 16–21点)",
+        filterWindow4to9: "🕓 16:00–21:00 (全部日期)",
+        filterWeekend: "🌟 仅看周五/周六/周日",
+        fridayTag: "周五黄金档",
+        weekendTag: "周末黄金档",
+        noPrimeMatch: "当前筛选条件下暂无周五、周六、周日 16:00–21:00 的黄金时段空场，请尝试切换人数或“全部场地”。",
         noSlotMatch: "当天没有符合当前筛选条件的空场时段。",
-        primeTimeBadge: "✨ 黄金时段",
+        primeTimeBadge: "✨ 黄金时段 (16:00–21:00)",
         zeroMatch: "无匹配",
         closedLabel: "未开放",
         courtNames: {{
@@ -591,32 +620,32 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         badgeSchedule: "🏸 NYBC Flushing Live Schedule",
         badgeLocation: "📍 132-70 34th Ave, Flushing NY 11354",
         pageTitle: "NYBC Flushing Court Availability Calendar",
-        langToggleBtn: "🌐 中文",
-        themeLight: "☀️ Light Mode",
-        themeDark: "🌙 Dark Mode",
+        langToggleBtn: "🌐 切换中文",
+        themeLight: "☀️ White Theme",
+        themeDark: "🌙 Dark Theme",
         openMainBtn: "Open NYBC Booking Page ↗",
         step1Label: "1. Reservation Duration (# of Players)",
-        step2Label: "2. Time Slot Filter",
+        step2Label: "2. Time Slot Filter (Prime = Fri–Sun 4–9 PM)",
         step3Label: "3. Court Filter",
         courtFilterAll: "All 7 Flushing Courts (Courts 1–5, 6 VIP, 07 Training)",
         courtFilterStandard: "Standard Courts Only (Courts 1–5)",
         courtFilterVip: "Court 6 (VIP Court) Only",
         courtFilterTraining: "Court 07 (Training Court) Only",
-        primeHeading: "✨ Best Upcoming Prime Slots (Weekday Evenings 5–10 PM & Weekends)",
-        primeDesc: "Click any date card to inspect all courts below, or click a pink time badge to book that court directly.",
+        primeHeading: "✨ Best Upcoming Prime Slots (Fri, Sat & Sun · 4:00 PM Start – 9:00 PM End)",
+        primeDesc: "Shows only Friday, Saturday & Sunday slots starting at or after 4:00 PM and ending at or before 9:00 PM. Click a card to inspect above, or click a pink badge to book directly.",
         calendarHeading: "📅 5-Week Availability Calendar",
-        legendPrime: "Prime Slot",
-        legendRegular: "Daytime/Late Open",
+        legendPrime: "Prime (Fri–Sun 4–9 PM)",
+        legendRegular: "Other Open Slots",
         weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         filterAll: "All Times",
-        filterPrime: "✨ Prime Slots",
-        filterEvening: "🌙 Evenings (5–10 PM)",
-        filterWeekend: "🌟 Weekends Only",
-        weekendTag: "Weekend",
-        weekdayEveTag: "Weekday Eve",
-        noPrimeMatch: "No prime slots match the current filter. Try switching to All Times or All Courts.",
+        filterPrime: "✨ Prime (Fri–Sun 4–9 PM)",
+        filterWindow4to9: "🕓 4–9 PM (Any Day)",
+        filterWeekend: "🌟 Fri / Sat / Sun Only",
+        fridayTag: "Friday Prime",
+        weekendTag: "Weekend Prime",
+        noPrimeMatch: "No Fri/Sat/Sun 4:00 PM – 9:00 PM prime slots match the current filter. Try switching player count or All Courts.",
         noSlotMatch: "No time slots on this date match your current filter.",
-        primeTimeBadge: "✨ Prime Time",
+        primeTimeBadge: "✨ Prime Time (4–9 PM)",
         zeroMatch: "0 match",
         closedLabel: "—",
         courtNames: {{}}
@@ -632,6 +661,13 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       courtFilter: "all",
       selectedDate: null
     }};
+
+    function applyTheme() {{
+      const root = document.documentElement;
+      root.classList.toggle("dark", state.isDark);
+      const vars = state.isDark ? DARK_VARS : LIGHT_VARS;
+      Object.keys(vars).forEach(k => root.style.setProperty(k, vars[k]));
+    }}
 
     function t() {{
       return I18N[state.lang];
@@ -723,9 +759,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     function formatPrimeSummary(totalPrimeSlots, daysCount) {{
       if (state.lang === "zh") {{
-        return "共 " + daysCount + " 天有黄金空场 · 合计 " + totalPrimeSlots + " 个黄金时段";
+        return "共 " + daysCount + " 个周五/六/日有空场 · 合计 " + totalPrimeSlots + " 个黄金时段";
       }}
-      return totalPrimeSlots + " prime slots across " + daysCount + " dates";
+      return totalPrimeSlots + " prime slots across " + daysCount + " Fri/Sat/Sun dates";
     }}
 
     function formatCourtsCountBadge(count) {{
@@ -783,16 +819,20 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       if (!plan) return [];
       return plan.days.map(d => {{
         const isWeekend = Boolean(d.wk);
+        const isFriSatSun = d.dow === "Fri" || d.dow === "Sat" || d.dow === "Sun";
         const filteredSlots = [];
         d.s.forEach(pair => {{
           const hhmm = pair[0];
           const courtIdxs = pair[1];
-          const hour = parseInt(hhmm.slice(0, 2), 10);
-          const isPrime = isWeekend ? (hour >= 10 && hour <= 21) : (hour >= 17 && hour <= 21);
+          const startMins = parseInt(hhmm.slice(0, 2), 10) * 60 + parseInt(hhmm.slice(3, 5), 10);
+          const endMins = startMins + plan.dur;
+          // Prime time: 4:00 PM (start) ~ 9:00 PM (end) on Friday, Saturday, and Sunday
+          const isWindow4to9 = startMins >= 16 * 60 && endMins <= 21 * 60;
+          const isPrime = isFriSatSun && isWindow4to9;
 
           if (state.timeFilter === "prime" && !isPrime) return;
-          if (state.timeFilter === "weekend" && !isWeekend) return;
-          if (state.timeFilter === "evening" && (hour < 17 || hour > 22)) return;
+          if (state.timeFilter === "weekend" && !isFriSatSun) return;
+          if (state.timeFilter === "window4to9" && !isWindow4to9) return;
 
           const courts = courtIdxs
             .map(idx => COMPACT_DATA.courts[idx])
@@ -820,7 +860,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
         return {{
           date: d.d,
+          dow: d.dow,
           isWeekend,
+          isFriSatSun,
           filteredSlots,
           filteredPrimeCount: filteredSlots.filter(s => s.isPrimeDateSlot).length
         }};
@@ -879,7 +921,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const wkHeader = document.getElementById("weekday-header");
       wkHeader.replaceChildren();
       dict.weekdays.forEach((wName, idx) => {{
-        wkHeader.appendChild(el("div", idx >= 5 ? "text-pink-500" : "", wName));
+        wkHeader.appendChild(el("div", idx >= 4 ? "text-pink-600 font-bold" : "", wName));
       }});
     }}
 
@@ -909,7 +951,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const timeOptions = [
         {{ id: "all", label: dict.filterAll }},
         {{ id: "prime", label: dict.filterPrime }},
-        {{ id: "evening", label: dict.filterEvening }},
+        {{ id: "window4to9", label: dict.filterWindow4to9 }},
         {{ id: "weekend", label: dict.filterWeekend }}
       ];
       timeOptions.forEach(opt => {{
@@ -935,17 +977,17 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       const badge = document.getElementById("prime-summary-badge");
       const dict = t();
 
-      const daysWithPrime = days.filter(d => d.filteredPrimeCount > 0);
+      // Strictly Friday, Saturday, and Sunday dates with 4:00 PM (start) ~ 9:00 PM (end) slots
+      const daysWithPrime = days.filter(d => d.isFriSatSun && d.filteredPrimeCount > 0);
       const totalPrimeSlots = daysWithPrime.reduce((acc, d) => acc + d.filteredPrimeCount, 0);
       badge.textContent = formatPrimeSummary(totalPrimeSlots, daysWithPrime.length);
 
-      const topDays = daysWithPrime.slice(0, 8);
-      if (topDays.length === 0) {{
+      if (daysWithPrime.length === 0) {{
         container.appendChild(el("p", "text-xs text-[var(--muted-foreground)] col-span-4", dict.noPrimeMatch));
         return;
       }}
 
-      topDays.forEach(d => {{
+      daysWithPrime.forEach(d => {{
         const isSelected = state.selectedDate === d.date;
         const card = el(
           "div",
@@ -960,22 +1002,20 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const title = el("span", "text-sm font-bold text-[var(--foreground)]", formatDateShort(d.date));
         const tag = el(
           "span",
-          d.isWeekend
-            ? "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-pink-500/15 text-pink-600"
-            : "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[var(--secondary)] text-[var(--secondary-foreground)]",
-          d.isWeekend ? dict.weekendTag : dict.weekdayEveTag
+          "px-2 py-0.5 text-[10px] font-semibold rounded-full bg-pink-500/15 text-pink-600",
+          d.isWeekend ? dict.weekendTag : dict.fridayTag
         );
         topRow.appendChild(title);
         topRow.appendChild(tag);
         card.appendChild(topRow);
 
         const chipsWrap = el("div", "flex flex-wrap gap-1");
-        const primeSlots = d.filteredSlots.filter(s => s.isPrimeDateSlot).slice(0, 4);
+        const primeSlots = d.filteredSlots.filter(s => s.isPrimeDateSlot);
         primeSlots.forEach(s => {{
           const link = el(
             "a",
             "px-2 py-0.5 text-[11px] font-semibold rounded-md bg-pink-500/15 text-pink-600 hover:bg-pink-500 hover:text-white transition",
-            s.timeFormatted + " (" + formatCourtsCountBadge(s.courtsCount) + ")"
+            s.timeFormatted + "–" + s.endTimeFormatted + " (" + formatCourtsCountBadge(s.courtsCount) + ")"
           );
           link.setAttribute("href", s.courts[0].bookingUrl);
           link.setAttribute("target", "_blank");
@@ -1040,7 +1080,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const top = el("div", "flex items-center justify-between w-full");
         const dateLabel = el(
           "span",
-          "text-xs font-bold " + (dayData.isWeekend ? "text-pink-600" : "text-[var(--foreground)]"),
+          "text-xs font-bold " + (dayData.isFriSatSun ? "text-pink-600" : "text-[var(--foreground)]"),
           formatMonthDayCell(cur, isFirstOrStart)
         );
         top.appendChild(dateLabel);
@@ -1126,6 +1166,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     }}
 
     function renderAll() {{
+      applyTheme();
       renderStaticText();
       renderControls();
       const days = getHydratedDays();
@@ -1133,9 +1174,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const firstPrime = days.find(d => d.filteredPrimeCount > 0);
         state.selectedDate = firstPrime ? firstPrime.date : days[0].date;
       }}
-      renderPrimePicks(days);
       renderCalendarGrid(days);
       renderSelectedDateDetail(days);
+      renderPrimePicks(days);
     }}
 
     document.getElementById("court-select").addEventListener("change", e => {{
@@ -1150,7 +1191,6 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     document.getElementById("theme-toggle").addEventListener("click", () => {{
       state.isDark = !state.isDark;
-      document.documentElement.classList.toggle("dark", state.isDark);
       renderAll();
     }});
 
