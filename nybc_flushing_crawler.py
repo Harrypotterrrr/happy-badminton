@@ -531,9 +531,14 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
     <!-- Main Schedule Workspace: Calendar Matrix + Selected Day Sheet -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
       <!-- Left: 5-Week Calendar Grid -->
-      <section class="lg:col-span-7 bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-3">
+      <section class="lg:col-span-7 bg-[var(--card)] border border-[var(--border)] rounded-lg p-3 sm:p-4 space-y-3">
         <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-[var(--border)]">
-          <h2 id="calendar-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
+          <div class="flex items-center gap-2">
+            <h2 id="calendar-heading" class="text-sm font-semibold text-[var(--foreground)]"></h2>
+            <button id="cal-view-toggle" type="button"
+               class="px-2 py-0.5 rounded text-[11px] font-medium border border-[var(--border)] bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-80 transition cursor-pointer">
+            </button>
+          </div>
           <div class="flex items-center gap-4 text-xs text-[var(--muted-foreground)]">
             <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span><span id="legend-prime"></span></span>
             <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span><span id="legend-regular"></span></span>
@@ -637,6 +642,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         primeHeading: "周末及周五优先时段空场汇总 (周五、周六、周日 16:00–21:00)",
         primeDesc: "仅筛选周五、周六、周日 16:00 (开始) 至 21:00 (结束) 的空场。点击日期卡片在上方查看，或点击时间直接跳转 NYBC 对应场地预约。",
         calendarHeading: "未来 5 周空场日历",
+        calViewCards: "切换卡片视图",
+        calViewGrid: "切换日历网格",
         legendPrime: "优先时段 (周五–周日 16–21点)",
         legendRegular: "常规可订时段",
         weekdays: ["一", "二", "三", "四", "五", "六", "日"],
@@ -650,6 +657,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         noSlotMatch: "当天没有符合筛选条件的空场时段。",
         primeTimeBadge: "优先时段",
         zeroMatch: "无空场",
+        zeroMatchShort: "0场",
         closedLabel: "—",
         footerNote: "每 2 小时由 GitHub Actions 自动同步 NYBC 法拉盛球馆空场数据 · 所有预约链接均直达按人数预约 (NYBC)",
         courtNames: {{
@@ -687,6 +695,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         primeHeading: "Upcoming Prime Slots (Fri, Sat & Sun · 4:00 PM – 9:00 PM)",
         primeDesc: "Strictly Friday, Saturday & Sunday slots starting >= 4:00 PM and ending <= 9:00 PM. Click a date to inspect above, or click a time chip to book that court directly.",
         calendarHeading: "5-Week Availability",
+        calViewCards: "Card View",
+        calViewGrid: "Grid View",
         legendPrime: "Prime (Fri–Sun 4–9 PM)",
         legendRegular: "Open Slots",
         weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -700,6 +710,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         noSlotMatch: "No open slots on this date match your current filter.",
         primeTimeBadge: "Prime",
         zeroMatch: "0 open",
+        zeroMatchShort: "0",
         closedLabel: "—",
         footerNote: "Auto-updated every 2 hours via GitHub Actions · Direct links locked to Reservation by # of players (NYBC)",
         courtNames: {{}}
@@ -714,6 +725,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       timeFilter: "all",
       courtFilter: "all",
       selectedDate: null,
+      mobileCalCards: false,
       isRefreshing: false
     }};
 
@@ -797,9 +809,9 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       }}).format(dt);
     }}
 
-    function formatMonthDayCell(dt, isFirstOrStart) {{
+    function formatMonthDayCell(dt, isFirstOrStart, compactNumeric) {{
       const dayNum = dt.getUTCDate();
-      if (state.lang === "zh") {{
+      if (compactNumeric || state.lang === "zh") {{
         if (dayNum === 1 || isFirstOrStart) {{
           return (dt.getUTCMonth() + 1) + "/" + dayNum;
         }}
@@ -861,9 +873,16 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     function formatSlotsCountLabel(count) {{
       if (state.lang === "zh") {{
-        return count + " 时段";
+        return count + " 场";
       }}
       return count + (count === 1 ? " slot" : " slots");
+    }}
+
+    function formatSlotsCountCompact(count) {{
+      if (state.lang === "zh") {{
+        return count + "场";
+      }}
+      return count + " open";
     }}
 
     function formatPrimeCountLabel(count) {{
@@ -871,6 +890,10 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         return count + " 优先";
       }}
       return count + " prime";
+    }}
+
+    function formatPrimeCountCompact(count) {{
+      return "★" + count;
     }}
 
     function formatCourtsOpenLabel(count) {{
@@ -1093,6 +1116,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       document.getElementById("prime-heading").textContent = dict.primeHeading;
       document.getElementById("prime-desc").textContent = dict.primeDesc;
       document.getElementById("calendar-heading").textContent = dict.calendarHeading;
+      document.getElementById("cal-view-toggle").textContent = state.mobileCalCards ? dict.calViewGrid : dict.calViewCards;
       document.getElementById("legend-prime").textContent = dict.legendPrime;
       document.getElementById("legend-regular").textContent = dict.legendRegular;
 
@@ -1215,9 +1239,72 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     function renderCalendarGrid(days) {{
       const grid = document.getElementById("calendar-grid");
+      const wkHeader = document.getElementById("weekday-header");
       grid.replaceChildren();
       if (days.length === 0) return;
       const dict = t();
+
+      // Card View mode (when toggled via #cal-view-toggle)
+      if (state.mobileCalCards) {{
+        wkHeader.classList.add("hidden");
+        grid.className = "grid grid-cols-2 sm:grid-cols-3 gap-2";
+        days.forEach(dayData => {{
+          const iso = dayData.date;
+          const isSelected = state.selectedDate === iso;
+          const count = dayData.filteredSlots.length;
+          const primeCount = dayData.filteredPrimeCount;
+
+          let cardClasses = "p-2.5 rounded border min-h-[60px] flex flex-col justify-between text-left transition cursor-pointer ";
+          if (isSelected) {{
+            cardClasses += "border-[var(--foreground)] bg-[var(--secondary)]/70";
+          }} else {{
+            cardClasses += "border-[var(--border)] bg-[var(--background)] hover:border-[var(--foreground)]/40";
+          }}
+
+          const card = el("button", cardClasses);
+          card.type = "button";
+          card.addEventListener("click", () => {{
+            state.selectedDate = iso;
+            renderAll();
+            scrollToSelectedDateOnMobile();
+          }});
+
+          const top = el("div", "flex items-center justify-between gap-1 w-full");
+          top.appendChild(
+            el(
+              "span",
+              "text-xs tabular-nums " + (isSelected || dayData.isFriSatSun ? "font-semibold text-[var(--foreground)]" : "font-medium text-[var(--muted-foreground)]"),
+              formatDateShort(iso)
+            )
+          );
+          if (primeCount > 0) {{
+            top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"));
+          }} else if (count > 0) {{
+            top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"));
+          }}
+          card.appendChild(top);
+
+          const bottom = el("div", "flex items-center justify-between gap-1 mt-1.5 tabular-nums");
+          bottom.appendChild(
+            el(
+              "span",
+              count > 0 ? "text-[11px] font-medium text-[var(--foreground)]" : "text-[10px] text-[var(--muted-foreground)]",
+              count > 0 ? formatSlotsCountLabel(count) : dict.zeroMatch
+            )
+          );
+          if (primeCount > 0) {{
+            bottom.appendChild(el("span", "sm:hidden text-[10px] font-medium text-amber-700 dark:text-amber-400", formatPrimeCountCompact(primeCount)));
+            bottom.appendChild(el("span", "hidden sm:inline text-[10px] font-medium text-amber-700 dark:text-amber-400", formatPrimeCountLabel(primeCount)));
+          }}
+          card.appendChild(bottom);
+          grid.appendChild(card);
+        }});
+        return;
+      }}
+
+      // Standard 7-Column Grid View mode
+      wkHeader.classList.remove("hidden");
+      grid.className = "grid grid-cols-7 gap-1";
 
       const dayMap = {{}};
       days.forEach(d => {{ dayMap[d.date] = d; }});
@@ -1238,8 +1325,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const isFirstOrStart = iso === days[0].date;
 
         if (!dayData) {{
-          const emptyCell = el("div", "p-2 rounded border border-transparent opacity-35 min-h-[68px] flex flex-col justify-between");
-          emptyCell.appendChild(el("span", "text-xs text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false)));
+          const emptyCell = el("div", "px-1 py-1.5 sm:p-2 rounded border border-transparent opacity-35 min-h-[60px] sm:min-h-[68px] flex flex-col justify-between");
+          emptyCell.appendChild(el("span", "text-[11px] sm:text-xs text-[var(--muted-foreground)] tabular-nums", formatMonthDayCell(cur, false, true)));
           emptyCell.appendChild(el("span", "text-[10px] text-[var(--muted-foreground)]", dict.closedLabel));
           grid.appendChild(emptyCell);
           continue;
@@ -1249,7 +1336,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         const count = dayData.filteredSlots.length;
         const primeCount = dayData.filteredPrimeCount;
 
-        let cellClasses = "p-2 rounded border min-h-[68px] flex flex-col justify-between text-left transition cursor-pointer ";
+        let cellClasses = "px-1 py-1.5 sm:p-2 rounded border min-h-[60px] sm:min-h-[68px] flex flex-col justify-between text-left transition cursor-pointer overflow-hidden ";
         if (isSelected) {{
           cellClasses += "border-[var(--foreground)] bg-[var(--secondary)]/70";
         }} else {{
@@ -1264,27 +1351,28 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
           scrollToSelectedDateOnMobile();
         }});
 
-        const top = el("div", "flex items-center justify-between w-full");
-        const dateLabel = el(
-          "span",
-          "text-xs tabular-nums " + (isSelected || dayData.isFriSatSun ? "font-semibold text-[var(--foreground)]" : "font-medium text-[var(--muted-foreground)]"),
-          formatMonthDayCell(cur, isFirstOrStart)
-        );
-        top.appendChild(dateLabel);
+        const top = el("div", "flex items-center justify-between w-full gap-0.5");
+        const dateTone = isSelected || dayData.isFriSatSun ? "font-semibold text-[var(--foreground)]" : "font-medium text-[var(--muted-foreground)]";
+        top.appendChild(el("span", "sm:hidden text-[11px] tabular-nums leading-none whitespace-nowrap " + dateTone, formatMonthDayCell(cur, isFirstOrStart, true)));
+        top.appendChild(el("span", "hidden sm:inline text-xs tabular-nums leading-none whitespace-nowrap " + dateTone, formatMonthDayCell(cur, isFirstOrStart, false)));
         if (primeCount > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-amber-500"));
+          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"));
         }} else if (count > 0) {{
-          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-emerald-600"));
+          top.appendChild(el("span", "w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"));
         }}
         cell.appendChild(top);
 
-        const bottom = el("div", "space-y-0.5 mt-1 tabular-nums");
+        const bottom = el("div", "space-y-0.5 mt-1 tabular-nums w-full");
         if (count === 0) {{
-          bottom.appendChild(el("div", "text-[10px] text-[var(--muted-foreground)]", dict.zeroMatch));
+          bottom.appendChild(el("div", "sm:hidden text-[10px] text-[var(--muted-foreground)] leading-tight whitespace-nowrap", dict.zeroMatchShort));
+          bottom.appendChild(el("div", "hidden sm:block text-[10px] text-[var(--muted-foreground)] leading-tight whitespace-nowrap", dict.zeroMatch));
         }} else {{
-          bottom.appendChild(el("div", "text-[11px] font-medium text-[var(--foreground)]", formatSlotsCountLabel(count)));
+          // Mobile: compact "8场" + "★2" (no wrapping); Desktop: "8 场" + "2 优先"
+          bottom.appendChild(el("div", "sm:hidden text-[10px] font-medium text-[var(--foreground)] leading-tight whitespace-nowrap", formatSlotsCountCompact(count)));
+          bottom.appendChild(el("div", "hidden sm:block text-[11px] font-medium text-[var(--foreground)] leading-tight whitespace-nowrap", formatSlotsCountLabel(count)));
           if (primeCount > 0) {{
-            bottom.appendChild(el("div", "text-[10px] font-medium text-amber-700 dark:text-amber-400", formatPrimeCountLabel(primeCount)));
+            bottom.appendChild(el("div", "sm:hidden text-[10px] font-medium text-amber-700 dark:text-amber-400 leading-tight whitespace-nowrap", formatPrimeCountCompact(primeCount)));
+            bottom.appendChild(el("div", "hidden sm:block text-[10px] font-medium text-amber-700 dark:text-amber-400 leading-tight whitespace-nowrap", formatPrimeCountLabel(primeCount)));
           }}
         }}
         cell.appendChild(bottom);
@@ -1365,6 +1453,11 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
 
     document.getElementById("court-select").addEventListener("change", e => {{
       state.courtFilter = e.target.value;
+      renderAll();
+    }});
+
+    document.getElementById("cal-view-toggle").addEventListener("click", () => {{
+      state.mobileCalCards = !state.mobileCalCards;
       renderAll();
     }});
 
