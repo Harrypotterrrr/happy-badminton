@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-10-14T15:00:27.132729+00:00",
+  "crawledAt": "2026-10-14T15:09:04.043742+00:00",
   "facility": "New York Badminton Center (Flushing)",
   "location": "132-70 34th Ave. Flushing NY 11354",
   "category": "Reservation by # of players (NYBC)",
@@ -9148,7 +9148,7 @@
               "endTime24": "09:00",
               "time12": "8:15 AM",
               "endTime12": "9:00 AM",
-              "courtsCount": 2,
+              "courtsCount": 3,
               "courts": [
                 {
                   "courtId": 6014879,
@@ -9157,6 +9157,14 @@
                   "isTraining": false,
                   "isoTime": "2026-11-10T08:15:00-0500",
                   "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6014879/datetime/2026-11-10T08%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-10T08:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015043/datetime/2026-11-10T08%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 },
                 {
                   "courtId": 6015559,
@@ -19648,7 +19656,7 @@
               "endTime24": "09:00",
               "time12": "8:00 AM",
               "endTime12": "9:00 AM",
-              "courtsCount": 2,
+              "courtsCount": 3,
               "courts": [
                 {
                   "courtId": 6014879,
@@ -19657,6 +19665,14 @@
                   "isTraining": false,
                   "isoTime": "2026-11-10T08:00:00-0500",
                   "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6014879/datetime/2026-11-10T08%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-10T08:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015043/datetime/2026-11-10T08%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 },
                 {
                   "courtId": 6015559,
@@ -28564,7 +28580,7 @@
               "endTime24": "09:00",
               "time12": "7:30 AM",
               "endTime12": "9:00 AM",
-              "courtsCount": 2,
+              "courtsCount": 3,
               "courts": [
                 {
                   "courtId": 6014879,
@@ -28573,6 +28589,14 @@
                   "isTraining": false,
                   "isoTime": "2026-11-10T07:30:00-0500",
                   "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6014879/datetime/2026-11-10T07%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-10T07:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015043/datetime/2026-11-10T07%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 },
                 {
                   "courtId": 6015559,
