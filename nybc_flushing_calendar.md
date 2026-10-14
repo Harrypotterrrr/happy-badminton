@@ -4,7 +4,7 @@
 - **预约类别 / Category**: `Reservation by # of players (NYBC)`
 - **官方预约链接 / Booking Page**: [NYBC Flushing Reservation](https://nybcreservation.as.me/schedule/6efeecae?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29)
 - **优先时段定义 / Prime Time**: `周五、周六、周日 16:00 (开始) – 21:00 (结束) / Fri, Sat & Sun 4:00 PM (start) – 9:00 PM (end)`
-- **更新时间 / Last Crawled**: `2026-10-14 19:00 EST`
+- **更新时间 / Last Crawled**: `2026-10-14 19:04 EST`
 
 ## 2人预约 / 2 Players (`Reservation for 2ppl` — 45 min, \$45.76)
 
