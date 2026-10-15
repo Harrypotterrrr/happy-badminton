@@ -126,7 +126,7 @@ echo "Pushing latest 'main' branch to ${REMOTE_URL}..."
 GH_PUSH_USER="$GH_USER" GH_PUSH_TOKEN="$GH_TOKEN" GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 \
   git push --force-with-lease -u origin main
 
-echo "Refreshing GitHub Actions 2-hour schedule (9 AM - 11 PM EST)..."
+echo "Refreshing GitHub Actions twice-daily schedule (9 AM & 9 PM EST)..."
 curl -sS -o /dev/null -X PUT \
   "https://api.github.com/repos/${GH_USER}/${REPO_NAME}/actions/workflows/update_calendar.yml/disable" \
   -H "Accept: application/vnd.github+json" \
@@ -138,12 +138,12 @@ curl -sS -o /dev/null -X PUT \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   -K <(printf 'header = "Authorization: Bearer %s"\n' "$GH_TOKEN") || true
 
-echo "Starting background auto-updater service (2h schedule 9am-11pm EST + instant web Refresh button listener)..."
+echo "Starting background auto-updater service (twice daily 9am & 9pm EST + instant web Refresh button listener)..."
 SYSTEMD_USER_DIR="${HOME}/.config/systemd/user"
 mkdir -p "$SYSTEMD_USER_DIR"
 cat > "${SYSTEMD_USER_DIR}/nybc-auto-updater.service" <<EOF
 [Unit]
-Description=NYBC Flushing Badminton Auto-Updater (9am-11pm EST 2h & Web Refresh Listener)
+Description=NYBC Flushing Badminton Auto-Updater (Twice Daily 9am & 9pm EST & Web Refresh Listener)
 After=network-online.target
 
 [Service]
@@ -190,6 +190,6 @@ echo ""
 echo "============================================================"
 echo "✅ Ready! Share this public link with your crush:"
 echo "   🌐 ${PUBLIC_URL}"
-echo "   (Auto-updates every 2h from 9 AM to 11 PM EST, and clicking"
+echo "   (Auto-updates twice a day at 9 AM & 9 PM EST, and clicking"
 echo "    '刷新数据' on the website now crawls & syncs automatically!)"
 echo "============================================================"

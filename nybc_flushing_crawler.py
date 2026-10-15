@@ -660,7 +660,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         zeroMatch: "无空场",
         zeroMatchShort: "0场",
         closedLabel: "—",
-        footerNote: "每天 9:00–23:00 (EST) 每 2 小时自动更新 · 点击「刷新数据」自动触发 GitHub 实时抓取并同步",
+        footerNote: "每天早晚自动更新 2 次 (9:00 / 21:00 EST) · 点击「刷新数据」自动触发 GitHub 实时抓取并同步",
         courtNames: {{
           "Court 1": "1号场",
           "Court 2": "2号场",
@@ -714,7 +714,7 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
         zeroMatch: "0 open",
         zeroMatchShort: "0",
         closedLabel: "—",
-        footerNote: "Auto-updated every 2 hours (9 AM – 11 PM EST) · Click Refresh to trigger live crawl & sync",
+        footerNote: "Auto-updated twice daily (9 AM & 9 PM EST) · Click Refresh to trigger live crawl & sync",
         courtNames: {{}}
       }}
     }};
@@ -1057,8 +1057,8 @@ def generate_html_calendar(data: dict[str, Any], use_jetski_cdn: bool = False) -
       if (silent) {{
         const latestTime = await pullLatestFromGitHub();
         renderAll();
-        // If current time is between 9 AM and 11 PM EST and data is >= 2 hours old, auto-trigger live crawl
-        if (isNyActiveWindow() && Date.now() - latestTime >= 2 * 3600 * 1000) {{
+        // If current time is between 9 AM and 11 PM EST and data is >= 12 hours old (twice a day), auto-trigger live crawl
+        if (isNyActiveWindow() && Date.now() - latestTime >= 12 * 3600 * 1000) {{
           refreshScheduleData(false);
         }}
         return;

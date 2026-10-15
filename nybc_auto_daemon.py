@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Background auto-updater for NYBC Flushing Badminton Calendar.
 
-1. Automatically crawls NYBC and pushes to GitHub every 2 hours between
-   9:00 AM and 11:00 PM America/New_York time (no auto-updates between 11 PM and 9 AM).
+1. Automatically crawls NYBC and pushes to GitHub twice a day (9:00 AM and
+   9:00 PM America/New_York time).
 2. Listens in real time to https://ntfy.sh/nybc-flushing-refresh-7f8a9b2c/json
    so clicking the '刷新数据' (Refresh Data) button on the public webpage
    immediately triggers a live crawl and updates GitHub within ~10 seconds.
@@ -239,13 +239,13 @@ def listen_ntfy_loop() -> None:
                 args=("web-refresh-button",),
                 daemon=True,
             ).start()
-    except Exception as e:
+    except Exception:
       time.sleep(3)
 
 
-def schedule_2h_loop() -> None:
-  """Runs every 2 hours between 9:00 AM and 11:00 PM America/New_York time."""
-  log("Started 2-hour scheduler (active 09:00–23:00 America/New_York, paused 23:00–09:00).")
+def schedule_twice_daily_loop() -> None:
+  """Runs twice a day at 9:00 AM and 9:00 PM America/New_York time."""
+  log("Started twice-daily scheduler (09:00 and 21:00 America/New_York).")
   last_scheduled_slot: tuple[str, int] | None = None
 
   while True:
@@ -255,23 +255,19 @@ def schedule_2h_loop() -> None:
       minute = now_ny.minute
       today_str = now_ny.strftime("%Y-%m-%d")
 
-      # Active window: 9:00 AM to 11:00 PM EST (hours 9, 11, 13, 15, 17, 19, 21, 23)
-      is_active_window = (9 <= hour < 23) or (hour == 23 and minute <= 5)
+      # 1) Exact twice-daily schedule slots: 9:00 AM and 9:00 PM EST
+      if hour in (9, 21) and minute <= 4:
+        slot_key = (today_str, hour)
+        if last_scheduled_slot != slot_key:
+          last_scheduled_slot = slot_key
+          run_crawl_and_push(f"scheduled-{hour:02d}h-EST")
 
-      if is_active_window:
-        # 1) Exact 2-hour schedule slot (9, 11, 13, 15, 17, 19, 21, 23)
-        if hour in (9, 11, 13, 15, 17, 19, 21, 23) and minute <= 4:
-          slot_key = (today_str, hour)
-          if last_scheduled_slot != slot_key:
-            last_scheduled_slot = slot_key
-            run_crawl_and_push(f"scheduled-{hour:02d}h-EST")
-
-        # 2) Catch-up check: if during 9 AM - 11 PM EST and data is >= 2 hours old
-        elif 9 <= hour < 23:
-          last_epoch = max(_last_crawl_epoch, get_last_crawled_epoch())
-          age_seconds = time.time() - last_epoch
-          if age_seconds >= 2 * 3600:
-            run_crawl_and_push("auto-2h-stale-check")
+      # 2) Catch-up check during daytime/evening (9 AM - 11 PM EST) if data is >= 12 hours old
+      elif 9 <= hour < 23:
+        last_epoch = max(_last_crawl_epoch, get_last_crawled_epoch())
+        age_seconds = time.time() - last_epoch
+        if age_seconds >= 12 * 3600:
+          run_crawl_and_push("auto-12h-stale-check")
     except Exception as e:
       log(f"Scheduler error: {e}")
 
@@ -281,7 +277,7 @@ def schedule_2h_loop() -> None:
 def main() -> None:
   t = threading.Thread(target=listen_ntfy_loop, daemon=True)
   t.start()
-  schedule_2h_loop()
+  schedule_twice_daily_loop()
 
 
 if __name__ == "__main__":
