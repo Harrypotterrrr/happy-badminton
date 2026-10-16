@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-10-16T15:02:41.921622+00:00",
+  "crawledAt": "2026-10-16T15:02:49.018986+00:00",
   "facility": "New York Badminton Center (Flushing)",
   "location": "132-70 34th Ave. Flushing NY 11354",
   "category": "Reservation by # of players (NYBC)",
@@ -321,7 +321,7 @@
               "endTime24": "17:00",
               "time12": "4:15 PM",
               "endTime12": "5:00 PM",
-              "courtsCount": 3,
+              "courtsCount": 2,
               "courts": [
                 {
                   "courtId": 6015636,
@@ -330,14 +330,6 @@
                   "isTraining": true,
                   "isoTime": "2026-10-16T16:15:00-0400",
                   "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-10-16T16%3A15%3A00-0400?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-10-16T16:15:00-0400",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/5898671/datetime/2026-10-16T16%3A15%3A00-0400?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 },
                 {
                   "courtId": 6015565,
@@ -12205,7 +12197,7 @@
               "endTime24": "17:00",
               "time12": "4:00 PM",
               "endTime12": "5:00 PM",
-              "courtsCount": 3,
+              "courtsCount": 2,
               "courts": [
                 {
                   "courtId": 6015636,
@@ -12214,14 +12206,6 @@
                   "isTraining": true,
                   "isoTime": "2026-10-16T16:00:00-0400",
                   "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-10-16T16%3A00%3A00-0400?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-10-16T16:00:00-0400",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/5898671/datetime/2026-10-16T16%3A00%3A00-0400?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 },
                 {
                   "courtId": 6015565,
