@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-11-13T02:00:36.665795+00:00",
+  "crawledAt": "2026-11-13T14:00:16.016455+00:00",
   "facility": "New York Badminton Center (Flushing)",
   "location": "132-70 34th Ave. Flushing NY 11354",
   "category": "Reservation by # of players (NYBC)",
@@ -167,371 +167,13 @@
       "categoryUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
       "days": [
         {
-          "date": "2026-11-12",
-          "dayOfWeek": "Thursday",
-          "shortDay": "Thu",
-          "monthDay": "Nov 12",
-          "isWeekend": false,
-          "totalSlots": 9,
-          "primeDateSlotsCount": 0,
-          "slots": [
-            {
-              "time24": "21:15",
-              "endTime24": "22:00",
-              "time12": "9:15 PM",
-              "endTime12": "10:00 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:30",
-              "endTime24": "22:15",
-              "time12": "9:30 PM",
-              "endTime12": "10:15 PM",
-              "courtsCount": 4,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015043,
-                  "courtName": "Court 4",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015043/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:45",
-              "endTime24": "22:30",
-              "time12": "9:45 PM",
-              "endTime12": "10:30 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:00",
-              "endTime24": "22:45",
-              "time12": "10:00 PM",
-              "endTime12": "10:45 PM",
-              "courtsCount": 5,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/5898671/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6014879,
-                  "courtName": "Court 3",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6014879/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:15",
-              "endTime24": "23:00",
-              "time12": "10:15 PM",
-              "endTime12": "11:00 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:30",
-              "endTime24": "23:15",
-              "time12": "10:30 PM",
-              "endTime12": "11:15 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:45",
-              "endTime24": "23:30",
-              "time12": "10:45 PM",
-              "endTime12": "11:30 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "23:00",
-              "endTime24": "23:45",
-              "time12": "11:00 PM",
-              "endTime12": "11:45 PM",
-              "courtsCount": 4,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015029,
-                  "courtName": "Court 1",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015029/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "23:15",
-              "endTime24": "00:00",
-              "time12": "11:15 PM",
-              "endTime12": "12:00 AM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T23:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-12T23%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-12T23%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-12T23%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-12T23%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            }
-          ]
-        },
-        {
           "date": "2026-11-13",
           "dayOfWeek": "Friday",
           "shortDay": "Fri",
           "monthDay": "Nov 13",
           "isWeekend": false,
-          "totalSlots": 10,
-          "primeDateSlotsCount": 5,
+          "totalSlots": 11,
+          "primeDateSlotsCount": 6,
           "slots": [
             {
               "time24": "09:45",
@@ -579,12 +221,12 @@
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
+                  "courtId": 6015565,
+                  "courtName": "Court 6 (VIP)",
+                  "isVip": true,
+                  "isTraining": false,
                   "isoTime": "2026-11-13T15:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-13T15%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-13T15%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-13T15%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
@@ -629,22 +271,22 @@
               "isPrimeDateSlot": true
             },
             {
-              "time24": "16:30",
-              "endTime24": "17:15",
-              "time12": "4:30 PM",
-              "endTime12": "5:15 PM",
+              "time24": "16:15",
+              "endTime24": "17:00",
+              "time12": "4:15 PM",
+              "endTime12": "5:00 PM",
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T16:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-11-13T16%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T16:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-13T16%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-13T16%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-13T16%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": true
             },
             {
@@ -702,6 +344,25 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-13T18%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": true
+            },
+            {
+              "time24": "19:00",
+              "endTime24": "19:45",
+              "time12": "7:00 PM",
+              "endTime12": "7:45 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T19:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": true
             },
             {
@@ -1124,7 +785,7 @@
           "shortDay": "Mon",
           "monthDay": "Nov 16",
           "isWeekend": false,
-          "totalSlots": 12,
+          "totalSlots": 14,
           "primeDateSlotsCount": 0,
           "slots": [
             {
@@ -1328,6 +989,44 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-16T17%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "18:00",
+              "endTime24": "18:45",
+              "time12": "6:00 PM",
+              "endTime12": "6:45 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-16T18:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-16T18%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-16T18%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "18:15",
+              "endTime24": "19:00",
+              "time12": "6:15 PM",
+              "endTime12": "7:00 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-16T18:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-11-16T18%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-11-16T18%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
             },
             {
@@ -11409,8 +11108,16 @@
               "endTime24": "22:00",
               "time12": "9:15 PM",
               "endTime12": "10:00 PM",
-              "courtsCount": 3,
+              "courtsCount": 4,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11444,8 +11151,16 @@
               "endTime24": "22:15",
               "time12": "9:30 PM",
               "endTime12": "10:15 PM",
-              "courtsCount": 5,
+              "courtsCount": 6,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11495,8 +11210,16 @@
               "endTime24": "22:30",
               "time12": "9:45 PM",
               "endTime12": "10:30 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:45:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11538,8 +11261,16 @@
               "endTime24": "22:45",
               "time12": "10:00 PM",
               "endTime12": "10:45 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11581,8 +11312,16 @@
               "endTime24": "23:00",
               "time12": "10:15 PM",
               "endTime12": "11:00 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11624,8 +11363,16 @@
               "endTime24": "23:15",
               "time12": "10:30 PM",
               "endTime12": "11:15 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11667,8 +11414,16 @@
               "endTime24": "23:30",
               "time12": "10:45 PM",
               "endTime12": "11:30 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:45:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11710,8 +11465,16 @@
               "endTime24": "23:45",
               "time12": "11:00 PM",
               "endTime12": "11:45 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T23:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11753,8 +11516,16 @@
               "endTime24": "00:00",
               "time12": "11:15 PM",
               "endTime12": "12:00 AM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T23:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-13T23%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -11799,9 +11570,123 @@
           "shortDay": "Mon",
           "monthDay": "Dec 14",
           "isWeekend": false,
-          "totalSlots": 25,
+          "totalSlots": 31,
           "primeDateSlotsCount": 0,
           "slots": [
+            {
+              "time24": "00:01",
+              "endTime24": "00:46",
+              "time12": "12:01 AM",
+              "endTime12": "12:46 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:01:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:16",
+              "endTime24": "01:01",
+              "time12": "12:16 AM",
+              "endTime12": "1:01 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:16:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:31",
+              "endTime24": "01:16",
+              "time12": "12:31 AM",
+              "endTime12": "1:16 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:31:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T00%3A31%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T00%3A31%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:46",
+              "endTime24": "01:31",
+              "time12": "12:46 AM",
+              "endTime12": "1:31 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:46:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T00%3A46%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T00%3A46%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "01:01",
+              "endTime24": "01:46",
+              "time12": "1:01 AM",
+              "endTime12": "1:46 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T01:01:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T01%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T01%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "09:00",
+              "endTime24": "09:45",
+              "time12": "9:00 AM",
+              "endTime12": "9:45 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T09:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015636/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
             {
               "time24": "10:15",
               "endTime24": "11:00",
@@ -12493,7 +12378,7 @@
           "shortDay": "Tue",
           "monthDay": "Dec 15",
           "isWeekend": false,
-          "totalSlots": 11,
+          "totalSlots": 13,
           "primeDateSlotsCount": 0,
           "slots": [
             {
@@ -12760,6 +12645,52 @@
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-15T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
+            },
+            {
+              "time24": "21:15",
+              "endTime24": "22:00",
+              "time12": "9:15 PM",
+              "endTime12": "10:00 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015565,
+                  "courtName": "Court 6 (VIP)",
+                  "isVip": true,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T21:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015565/datetime/2026-12-15T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-15T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "22:00",
+              "endTime24": "22:45",
+              "time12": "10:00 PM",
+              "endTime12": "10:45 PM",
+              "courtsCount": 2,
+              "courts": [
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015043/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/6015559/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/25483068/calendar/any/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
             }
           ]
         }
@@ -12774,329 +12705,6 @@
       "description": "3ppl x $22 + 4% ( credit card processing fee )",
       "categoryUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
       "days": [
-        {
-          "date": "2026-11-12",
-          "dayOfWeek": "Thursday",
-          "shortDay": "Thu",
-          "monthDay": "Nov 12",
-          "isWeekend": false,
-          "totalSlots": 8,
-          "primeDateSlotsCount": 0,
-          "slots": [
-            {
-              "time24": "21:15",
-              "endTime24": "22:15",
-              "time12": "9:15 PM",
-              "endTime12": "10:15 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:30",
-              "endTime24": "22:30",
-              "time12": "9:30 PM",
-              "endTime12": "10:30 PM",
-              "courtsCount": 4,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015043,
-                  "courtName": "Court 4",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015043/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:45",
-              "endTime24": "22:45",
-              "time12": "9:45 PM",
-              "endTime12": "10:45 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:00",
-              "endTime24": "23:00",
-              "time12": "10:00 PM",
-              "endTime12": "11:00 PM",
-              "courtsCount": 5,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/5898671/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6014879,
-                  "courtName": "Court 3",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6014879/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:15",
-              "endTime24": "23:15",
-              "time12": "10:15 PM",
-              "endTime12": "11:15 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:30",
-              "endTime24": "23:30",
-              "time12": "10:30 PM",
-              "endTime12": "11:30 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:45",
-              "endTime24": "23:45",
-              "time12": "10:45 PM",
-              "endTime12": "11:45 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "23:00",
-              "endTime24": "00:00",
-              "time12": "11:00 PM",
-              "endTime12": "12:00 AM",
-              "courtsCount": 4,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015029,
-                  "courtName": "Court 1",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015029/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T23:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-12T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            }
-          ]
-        },
         {
           "date": "2026-11-13",
           "dayOfWeek": "Friday",
@@ -13152,12 +12760,12 @@
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
+                  "courtId": 6015565,
+                  "courtName": "Court 6 (VIP)",
+                  "isVip": true,
+                  "isTraining": false,
                   "isoTime": "2026-11-13T15:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-13T15%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-13T15%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T15%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
@@ -13202,22 +12810,22 @@
               "isPrimeDateSlot": false
             },
             {
-              "time24": "16:15",
-              "endTime24": "17:15",
-              "time12": "4:15 PM",
-              "endTime12": "5:15 PM",
+              "time24": "16:00",
+              "endTime24": "17:00",
+              "time12": "4:00 PM",
+              "endTime12": "5:00 PM",
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T16:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015565/datetime/2026-11-13T16%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T16:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-13T16%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T16%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T16%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": true
             },
             {
@@ -13240,25 +12848,6 @@
               "isPrimeDateSlot": true
             },
             {
-              "time24": "17:45",
-              "endTime24": "18:45",
-              "time12": "5:45 PM",
-              "endTime12": "6:45 PM",
-              "courtsCount": 1,
-              "courts": [
-                {
-                  "courtId": 6015043,
-                  "courtName": "Court 4",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T17:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015043/datetime/2026-11-13T17%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T17%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": true
-            },
-            {
               "time24": "18:30",
               "endTime24": "19:30",
               "time12": "6:30 PM",
@@ -13275,6 +12864,25 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T18%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": true
+            },
+            {
+              "time24": "19:00",
+              "endTime24": "20:00",
+              "time12": "7:00 PM",
+              "endTime12": "8:00 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T19:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": true
             },
             {
@@ -13610,7 +13218,7 @@
           "shortDay": "Mon",
           "monthDay": "Nov 16",
           "isWeekend": false,
-          "totalSlots": 10,
+          "totalSlots": 11,
           "primeDateSlotsCount": 0,
           "slots": [
             {
@@ -13784,6 +13392,25 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-16T17%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "18:00",
+              "endTime24": "19:00",
+              "time12": "6:00 PM",
+              "endTime12": "7:00 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-11-16T18:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-11-16T18%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-11-16T18%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
             },
             {
@@ -23084,8 +22711,16 @@
               "endTime24": "22:15",
               "time12": "9:15 PM",
               "endTime12": "10:15 PM",
-              "courtsCount": 3,
+              "courtsCount": 4,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23119,8 +22754,16 @@
               "endTime24": "22:30",
               "time12": "9:30 PM",
               "endTime12": "10:30 PM",
-              "courtsCount": 5,
+              "courtsCount": 6,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23170,8 +22813,16 @@
               "endTime24": "22:45",
               "time12": "9:45 PM",
               "endTime12": "10:45 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:45:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23213,8 +22864,16 @@
               "endTime24": "23:00",
               "time12": "10:00 PM",
               "endTime12": "11:00 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23256,8 +22915,16 @@
               "endTime24": "23:15",
               "time12": "10:15 PM",
               "endTime12": "11:15 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23299,8 +22966,16 @@
               "endTime24": "23:30",
               "time12": "10:30 PM",
               "endTime12": "11:30 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23342,8 +23017,16 @@
               "endTime24": "23:45",
               "time12": "10:45 PM",
               "endTime12": "11:45 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:45:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T22%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23385,8 +23068,16 @@
               "endTime24": "00:00",
               "time12": "11:00 PM",
               "endTime12": "12:00 AM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T23:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-13T23%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -23431,9 +23122,104 @@
           "shortDay": "Mon",
           "monthDay": "Dec 14",
           "isWeekend": false,
-          "totalSlots": 23,
+          "totalSlots": 28,
           "primeDateSlotsCount": 0,
           "slots": [
+            {
+              "time24": "00:01",
+              "endTime24": "01:01",
+              "time12": "12:01 AM",
+              "endTime12": "1:01 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:01:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:16",
+              "endTime24": "01:16",
+              "time12": "12:16 AM",
+              "endTime12": "1:16 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:16:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:31",
+              "endTime24": "01:31",
+              "time12": "12:31 AM",
+              "endTime12": "1:31 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:31:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-14T00%3A31%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-14T00%3A31%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:46",
+              "endTime24": "01:46",
+              "time12": "12:46 AM",
+              "endTime12": "1:46 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:46:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-14T00%3A46%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-14T00%3A46%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "09:00",
+              "endTime24": "10:00",
+              "time12": "9:00 AM",
+              "endTime12": "10:00 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T09:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015636/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
             {
               "time24": "10:15",
               "endTime24": "11:15",
@@ -24079,7 +23865,7 @@
           "shortDay": "Tue",
           "monthDay": "Dec 15",
           "isWeekend": false,
-          "totalSlots": 10,
+          "totalSlots": 11,
           "primeDateSlotsCount": 0,
           "slots": [
             {
@@ -24335,6 +24121,33 @@
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-15T21%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
+            },
+            {
+              "time24": "22:00",
+              "endTime24": "23:00",
+              "time12": "10:00 PM",
+              "endTime12": "11:00 PM",
+              "courtsCount": 2,
+              "courts": [
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015043/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/6015559/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435410/calendar/any/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
             }
           ]
         }
@@ -24350,278 +24163,14 @@
       "categoryUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
       "days": [
         {
-          "date": "2026-11-12",
-          "dayOfWeek": "Thursday",
-          "shortDay": "Thu",
-          "monthDay": "Nov 12",
-          "isWeekend": false,
-          "totalSlots": 6,
-          "primeDateSlotsCount": 0,
-          "slots": [
-            {
-              "time24": "21:15",
-              "endTime24": "22:45",
-              "time12": "9:15 PM",
-              "endTime12": "10:45 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:30",
-              "endTime24": "23:00",
-              "time12": "9:30 PM",
-              "endTime12": "11:00 PM",
-              "courtsCount": 4,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015043,
-                  "courtName": "Court 4",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015043/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "21:45",
-              "endTime24": "23:15",
-              "time12": "9:45 PM",
-              "endTime12": "11:15 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T21:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:00",
-              "endTime24": "23:30",
-              "time12": "10:00 PM",
-              "endTime12": "11:30 PM",
-              "courtsCount": 5,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/5898671/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6014879,
-                  "courtName": "Court 3",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6014879/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:15",
-              "endTime24": "23:45",
-              "time12": "10:15 PM",
-              "endTime12": "11:45 PM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:15:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
-            {
-              "time24": "22:30",
-              "endTime24": "00:00",
-              "time12": "10:30 PM",
-              "endTime12": "12:00 AM",
-              "courtsCount": 3,
-              "courts": [
-                {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015559,
-                  "courtName": "Court 5",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                },
-                {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-12T22:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-12T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            }
-          ]
-        },
-        {
           "date": "2026-11-13",
           "dayOfWeek": "Friday",
           "shortDay": "Fri",
           "monthDay": "Nov 13",
           "isWeekend": false,
-          "totalSlots": 9,
+          "totalSlots": 8,
           "primeDateSlotsCount": 3,
           "slots": [
-            {
-              "time24": "09:00",
-              "endTime24": "10:30",
-              "time12": "9:00 AM",
-              "endTime12": "10:30 AM",
-              "courtsCount": 1,
-              "courts": [
-                {
-                  "courtId": 5898671,
-                  "courtName": "Court 2",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T09:00:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/5898671/datetime/2026-11-13T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": false
-            },
             {
               "time24": "09:30",
               "endTime24": "11:00",
@@ -24649,12 +24198,12 @@
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015636,
-                  "courtName": "Court 07 (Training)",
-                  "isVip": false,
-                  "isTraining": true,
+                  "courtId": 6015565,
+                  "courtName": "Court 6 (VIP)",
+                  "isVip": true,
+                  "isTraining": false,
                   "isoTime": "2026-11-13T14:30:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-13T14%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-13T14%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T14%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
@@ -24699,22 +24248,22 @@
               "isPrimeDateSlot": false
             },
             {
-              "time24": "15:45",
-              "endTime24": "17:15",
-              "time12": "3:45 PM",
-              "endTime12": "5:15 PM",
+              "time24": "15:30",
+              "endTime24": "17:00",
+              "time12": "3:30 PM",
+              "endTime12": "5:00 PM",
               "courtsCount": 1,
               "courts": [
                 {
-                  "courtId": 6015565,
-                  "courtName": "Court 6 (VIP)",
-                  "isVip": true,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T15:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015565/datetime/2026-11-13T15%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T15:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-13T15%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
                 }
               ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T15%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T15%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
             },
             {
@@ -24737,25 +24286,6 @@
               "isPrimeDateSlot": true
             },
             {
-              "time24": "17:45",
-              "endTime24": "19:15",
-              "time12": "5:45 PM",
-              "endTime12": "7:15 PM",
-              "courtsCount": 1,
-              "courts": [
-                {
-                  "courtId": 6015043,
-                  "courtName": "Court 4",
-                  "isVip": false,
-                  "isTraining": false,
-                  "isoTime": "2026-11-13T17:45:00-0500",
-                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015043/datetime/2026-11-13T17%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
-                }
-              ],
-              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T17%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
-              "isPrimeDateSlot": true
-            },
-            {
               "time24": "18:30",
               "endTime24": "20:00",
               "time12": "6:30 PM",
@@ -24772,6 +24302,25 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T18%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": true
+            },
+            {
+              "time24": "19:00",
+              "endTime24": "20:30",
+              "time12": "7:00 PM",
+              "endTime12": "8:30 PM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-11-13T19:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-11-13T19%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": true
             }
           ]
@@ -33587,8 +33136,16 @@
               "endTime24": "22:45",
               "time12": "9:15 PM",
               "endTime12": "10:45 PM",
-              "courtsCount": 3,
+              "courtsCount": 4,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T21%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33622,8 +33179,16 @@
               "endTime24": "23:00",
               "time12": "9:30 PM",
               "endTime12": "11:00 PM",
-              "courtsCount": 5,
+              "courtsCount": 6,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T21%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33673,8 +33238,16 @@
               "endTime24": "23:15",
               "time12": "9:45 PM",
               "endTime12": "11:15 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T21:45:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T21%3A45%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33716,8 +33289,16 @@
               "endTime24": "23:30",
               "time12": "10:00 PM",
               "endTime12": "11:30 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33759,8 +33340,16 @@
               "endTime24": "23:45",
               "time12": "10:15 PM",
               "endTime12": "11:45 PM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:15:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T22%3A15%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33802,8 +33391,16 @@
               "endTime24": "00:00",
               "time12": "10:30 PM",
               "endTime12": "12:00 AM",
-              "courtsCount": 4,
+              "courtsCount": 5,
               "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-13T22:30:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-13T22%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
                 {
                   "courtId": 6015029,
                   "courtName": "Court 1",
@@ -33848,9 +33445,66 @@
           "shortDay": "Mon",
           "monthDay": "Dec 14",
           "isWeekend": false,
-          "totalSlots": 21,
+          "totalSlots": 24,
           "primeDateSlotsCount": 0,
           "slots": [
+            {
+              "time24": "00:01",
+              "endTime24": "01:31",
+              "time12": "12:01 AM",
+              "endTime12": "1:31 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:01:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-14T00%3A01%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "00:16",
+              "endTime24": "01:46",
+              "time12": "12:16 AM",
+              "endTime12": "1:46 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T00:16:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-14T00%3A16%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "09:00",
+              "endTime24": "10:30",
+              "time12": "9:00 AM",
+              "endTime12": "10:30 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6015636,
+                  "courtName": "Court 07 (Training)",
+                  "isVip": false,
+                  "isTraining": true,
+                  "isoTime": "2026-12-14T09:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015636/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-14T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
             {
               "time24": "10:00",
               "endTime24": "11:30",
@@ -34562,7 +34216,7 @@
           "shortDay": "Tue",
           "monthDay": "Dec 15",
           "isWeekend": false,
-          "totalSlots": 8,
+          "totalSlots": 9,
           "primeDateSlotsCount": 0,
           "slots": [
             {
@@ -34771,6 +34425,63 @@
                 }
               ],
               "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-15T20%3A30%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            },
+            {
+              "time24": "22:00",
+              "endTime24": "23:30",
+              "time12": "10:00 PM",
+              "endTime12": "11:30 PM",
+              "courtsCount": 2,
+              "courts": [
+                {
+                  "courtId": 6015043,
+                  "courtName": "Court 4",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015043/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                },
+                {
+                  "courtId": 6015559,
+                  "courtName": "Court 5",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-15T22:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6015559/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-15T22%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
+              "isPrimeDateSlot": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-16",
+          "dayOfWeek": "Wednesday",
+          "shortDay": "Wed",
+          "monthDay": "Dec 16",
+          "isWeekend": false,
+          "totalSlots": 1,
+          "primeDateSlotsCount": 0,
+          "slots": [
+            {
+              "time24": "09:00",
+              "endTime24": "10:30",
+              "time12": "9:00 AM",
+              "endTime12": "10:30 AM",
+              "courtsCount": 1,
+              "courts": [
+                {
+                  "courtId": 6014879,
+                  "courtName": "Court 3",
+                  "isVip": false,
+                  "isTraining": false,
+                  "isoTime": "2026-12-16T09:00:00-0500",
+                  "bookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/6014879/datetime/2026-12-16T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29"
+                }
+              ],
+              "anyCourtBookingUrl": "https://nybcreservation.as.me/schedule/6efeecae/appointment/26435492/calendar/any/datetime/2026-12-16T09%3A00%3A00-0500?categories%5B%5D=Reservation+by+%23+of+players+%28NYBC%29",
               "isPrimeDateSlot": false
             }
           ]
